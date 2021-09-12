@@ -9,7 +9,6 @@ onready var light :Light2D = $Light2D
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	light.hide()
-	self.hide()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -18,6 +17,7 @@ func _ready() -> void:
 
 
 func _on_EnterBlock_body_entered(body: Node) -> void:
-	self.show()
 	light.show()
+	$Sprite.frame = 1
+	body.is_block_push()
 	print("dfsrfgg")

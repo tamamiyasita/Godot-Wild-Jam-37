@@ -4,7 +4,7 @@ const UP_DIRECTION := Vector2.UP
 
 export var speed := 600
 
-export var jump_pow := 1400.0
+export var jump_pow := 1100.0
 
 export var gravity := 4500.0
 
@@ -30,6 +30,10 @@ func movement(delta: float) -> void:
 		_velocity.y = -jump_pow
 		
 	
+func is_block_push() -> void:
+	_velocity.y = jump_pow
 	
+
+
 func is_jumping() -> bool:
 	return Input.is_action_just_pressed('jump') 

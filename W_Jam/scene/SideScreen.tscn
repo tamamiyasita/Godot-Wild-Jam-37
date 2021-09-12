@@ -1,194 +1,130 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://image/atach.png" type="Texture" id=1]
 [ext_resource path="res://script/SideScreen.gd" type="Script" id=2]
 [ext_resource path="res://scene/Player.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scene/EnterBlock.tscn" type="PackedScene" id=4]
-
-[sub_resource type="StreamTexture" id=1]
-flags = 4
-load_path = "res://.import/icon.png-487276ed1e3a0c39cad0279d744ee560.stex"
-
-[sub_resource type="Animation" id=2]
-resource_name = "start_meter"
-length = 2.0
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("../../HBoxContainer/PowerMeter1:value")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1, 2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ 0.0, 100.0, 0.0 ]
-}
-
-[sub_resource type="Animation" id=3]
-resource_name = "start_meter"
-length = 2.0
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("../../HBoxContainer/PowerMeter2:value")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1, 2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ 0.0, 100.0, 0.0 ]
-}
-
-[sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 237.202, 10 )
-
-[sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 6.79663, 72.5209 )
+[ext_resource path="res://scene/BarSys.tscn" type="PackedScene" id=4]
+[ext_resource path="res://image/side_back_panel.png" type="Texture" id=5]
 
 [node name="SideScreen1" type="CanvasLayer"]
 script = ExtResource( 2 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_left = 561.0
+margin_top = 4.0
+margin_right = 1061.0
+margin_bottom = 504.0
+texture = ExtResource( 5 )
+expand = true
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchor_left = 0.769
 anchor_right = 0.993
 anchor_bottom = 1.0
-margin_left = -225.456
-margin_right = -5.83203
+margin_left = -265.456
+margin_top = 6.0
+margin_right = 5.16803
+custom_constants/margin_right = 13
+custom_constants/margin_left = 13
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer"]
-modulate = Color( 0.247059, 0.247059, 0.247059, 1 )
-margin_right = 448.0
-margin_bottom = 600.0
-texture = ExtResource( 1 )
-expand = true
+[node name="BarSys" parent="MarginContainer" instance=ExtResource( 4 )]
+margin_right = 491.0
 
-[node name="Panel" type="VBoxContainer" parent="MarginContainer"]
-margin_right = 448.0
-margin_bottom = 600.0
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Panel"]
-margin_right = 448.0
-margin_bottom = 350.0
-custom_constants/separation = 4
-
-[node name="PowerMeter1" type="TextureProgress" parent="MarginContainer/Panel/HBoxContainer"]
-modulate = Color( 0.45098, 0.360784, 0.360784, 1 )
+[node name="Panel" parent="MarginContainer/BarSys" index="0"]
 margin_right = 222.0
-margin_bottom = 350.0
-rect_min_size = Vector2( 30, 350 )
-size_flags_horizontal = 15
-size_flags_vertical = 15
-texture_progress = ExtResource( 1 )
-fill_mode = 3
-tint_under = Color( 0.368627, 0.25098, 0.25098, 1 )
-tint_progress = Color( 0.482353, 0.411765, 0.411765, 1 )
-nine_patch_stretch = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="PowerMeter2" type="TextureProgress" parent="MarginContainer/Panel/HBoxContainer"]
-modulate = Color( 0.45098, 0.360784, 0.360784, 1 )
+[node name="HBoxContainer" parent="MarginContainer/BarSys/Panel" index="0"]
+margin_right = 222.0
+
+[node name="CenterContainer3" parent="MarginContainer/BarSys/Panel/HBoxContainer" index="0"]
+margin_right = 71.0
+
+[node name="PowerMeter1" parent="MarginContainer/BarSys/Panel/HBoxContainer/CenterContainer3" index="0"]
+margin_left = 10.0
+margin_top = 0.0
+margin_right = 60.0
+margin_bottom = 400.0
+
+[node name="CenterContainer" parent="MarginContainer/BarSys/Panel/HBoxContainer" index="1"]
+margin_left = 75.0
+margin_right = 146.0
+
+[node name="CenterContainer2" parent="MarginContainer/BarSys/Panel/HBoxContainer" index="2"]
+margin_left = 150.0
+margin_right = 222.0
+
+[node name="PowerMeter2" parent="MarginContainer/BarSys/Panel/HBoxContainer/CenterContainer2" index="0"]
+margin_left = 21.0
+margin_right = 51.0
+
+[node name="HBoxContainer2" parent="MarginContainer/BarSys/Panel" index="1"]
+margin_right = 222.0
+
+[node name="CenterContainer3" parent="MarginContainer/BarSys/Panel/HBoxContainer2" index="1"]
+margin_right = 111.0
+
+[node name="CenterContainer2" parent="MarginContainer/BarSys/Panel/HBoxContainer2" index="2"]
+margin_left = 115.0
+margin_right = 222.0
+
+[node name="MarginContainer" parent="MarginContainer/BarSys/Panel" index="2"]
+margin_right = 222.0
+
+[node name="TextureRect" parent="MarginContainer/BarSys/Panel/MarginContainer" index="0"]
+margin_right = 222.0
+
+[node name="CenterContainer" parent="MarginContainer/BarSys" index="1"]
 margin_left = 226.0
-margin_right = 448.0
-margin_bottom = 350.0
-rect_min_size = Vector2( 30, 320 )
-size_flags_horizontal = 15
-size_flags_vertical = 15
-texture_progress = SubResource( 1 )
-fill_mode = 3
-tint_under = Color( 0.368627, 0.25098, 0.25098, 1 )
-tint_progress = Color( 0.482353, 0.411765, 0.411765, 1 )
-nine_patch_stretch = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
+margin_right = 256.0
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/Panel"]
-margin_top = 354.0
-margin_right = 448.0
-margin_bottom = 424.0
-custom_constants/separation = 4
+[node name="Panel2" parent="MarginContainer/BarSys" index="2"]
+margin_left = 260.0
+margin_right = 478.0
 
-[node name="StopButton1" type="Button" parent="MarginContainer/Panel/HBoxContainer2"]
-visible = false
-modulate = Color( 0.341176, 0.0666667, 0.0666667, 1 )
-margin_right = 222.0
-margin_bottom = 70.0
-rect_min_size = Vector2( 107, 0 )
-size_flags_horizontal = 15
-size_flags_vertical = 15
-icon = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="HBoxContainer" parent="MarginContainer/BarSys/Panel2" index="0"]
+margin_right = 218.0
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="MarginContainer/Panel/HBoxContainer2/StopButton1"]
-autoplay = "start_meter"
-anims/start_meter = SubResource( 2 )
+[node name="PowerMeter1" parent="MarginContainer/BarSys/Panel2/HBoxContainer" index="0"]
+margin_right = 107.0
 
-[node name="StopButton2" type="Button" parent="MarginContainer/Panel/HBoxContainer2"]
-modulate = Color( 0.341176, 0.0666667, 0.0666667, 1 )
-margin_right = 448.0
-margin_bottom = 70.0
-rect_min_size = Vector2( 107, 0 )
-size_flags_horizontal = 15
-size_flags_vertical = 15
-icon = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="PowerMeter2" parent="MarginContainer/BarSys/Panel2/HBoxContainer" index="1"]
+margin_left = 111.0
+margin_right = 218.0
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="MarginContainer/Panel/HBoxContainer2/StopButton2"]
-autoplay = "start_meter"
-anims/start_meter = SubResource( 3 )
+[node name="HBoxContainer2" parent="MarginContainer/BarSys/Panel2" index="1"]
+margin_right = 218.0
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Panel"]
-margin_top = 428.0
-margin_right = 448.0
-margin_bottom = 600.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
+[node name="CenterContainer" parent="MarginContainer/BarSys/Panel2/HBoxContainer2" index="0"]
+margin_right = 107.0
 
-[node name="EnterBlock" parent="MarginContainer/Panel/MarginContainer" instance=ExtResource( 4 )]
-position = Vector2( 113.237, -19.0605 )
+[node name="Control" parent="MarginContainer/BarSys/Panel2/HBoxContainer2/CenterContainer" index="1"]
+margin_left = 53.0
+margin_right = 53.0
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/Panel/MarginContainer"]
-modulate = Color( 0.25098, 0.196078, 0.196078, 1 )
-margin_right = 448.0
-margin_bottom = 172.0
-texture = ExtResource( 1 )
-expand = true
+[node name="CenterContainer2" parent="MarginContainer/BarSys/Panel2/HBoxContainer2" index="1"]
+margin_left = 111.0
+margin_right = 218.0
 
-[node name="KinematicBody2D" type="KinematicBody2D" parent="MarginContainer/Panel/MarginContainer/TextureRect"]
+[node name="Control" parent="MarginContainer/BarSys/Panel2/HBoxContainer2/CenterContainer2" index="0"]
+margin_left = 53.0
+margin_right = 53.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="MarginContainer/Panel/MarginContainer/TextureRect/KinematicBody2D"]
-position = Vector2( 221.997, 159.77 )
-shape = SubResource( 4 )
+[node name="MarginContainer" parent="MarginContainer/BarSys/Panel2" index="2"]
+margin_right = 218.0
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="MarginContainer/Panel/MarginContainer/TextureRect/KinematicBody2D"]
-position = Vector2( 6.72717, 75.6806 )
-shape = SubResource( 5 )
+[node name="TextureRect" parent="MarginContainer/BarSys/Panel2/MarginContainer" index="0"]
+margin_right = 218.0
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="MarginContainer/Panel/MarginContainer/TextureRect/KinematicBody2D"]
-position = Vector2( 442.312, 76.5215 )
-shape = SubResource( 5 )
+[node name="Player" parent="." instance=ExtResource( 3 )]
+position = Vector2( 614, 596 )
+z_index = 1
 
-[node name="icon" type="Sprite" parent="MarginContainer/Panel/MarginContainer/TextureRect/KinematicBody2D"]
-position = Vector2( -277.324, 73.6789 )
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 624.25, 414 )
+scale = Vector2( 3.23437, 1.125 )
 texture = ExtResource( 1 )
 
-[node name="Player" parent="MarginContainer/Panel/MarginContainer" instance=ExtResource( 3 )]
-position = Vector2( 64.0793, 101.381 )
-
-[connection signal="pressed" from="MarginContainer/Panel/HBoxContainer2/StopButton1" to="." method="_on_StopButton_pressed"]
-[connection signal="pressed" from="MarginContainer/Panel/HBoxContainer2/StopButton2" to="." method="_on_StopButton2_pressed"]
-
-[editable path="MarginContainer/Panel/MarginContainer/EnterBlock"]
+[editable path="MarginContainer/BarSys"]
