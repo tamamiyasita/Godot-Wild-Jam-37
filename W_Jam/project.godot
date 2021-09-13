@@ -14,6 +14,10 @@ config/name="W_Jam"
 run/main_scene="res://scene/Main.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+Main="*res://Main.tscn"
+
 [importer_defaults]
 
 texture={

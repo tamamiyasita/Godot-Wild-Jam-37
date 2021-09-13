@@ -1,5 +1,6 @@
 extends Area2D
 
+onready var anime :AnimationPlayer = $PowerMeter1/AnimationPlayer
 onready var light :Light2D = $Light2D
 # Declare member variables here. Examples:
 # var a: int = 2
@@ -20,4 +21,5 @@ func _on_EnterBlock_body_entered(body: Node) -> void:
 	light.show()
 	$Sprite.frame = 1
 	body.is_block_push()
-	print("dfsrfgg")
+	anime.stop()
+	print("block_push")

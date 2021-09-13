@@ -10,14 +10,14 @@ resource_name = "start_meter"
 length = 2.0
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath(".:value")
+tracks/0/path = NodePath("..:value")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 1, 2 ),
-"transitions": PoolRealArray( 6.27666, 0.217638, 0.637282 ),
+"transitions": PoolRealArray( 1.7411, 0.435275, 2.73208 ),
 "update": 0,
 "values": [ 0.0, 100.0, 0.0 ]
 }
@@ -43,10 +43,10 @@ __meta__ = {
 position = Vector2( 26, 452 )
 z_index = 1
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="EnterBlock"]
+autoplay = "start_meter"
+anims/start_meter = SubResource( 1 )
+
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 26, 416 )
 texture = ExtResource( 4 )
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "start_meter"
-anims/start_meter = SubResource( 1 )

@@ -8,6 +8,8 @@ export var jump_pow := 1100.0
 
 export var gravity := 4500.0
 
+onready var sprite : Sprite = $Sprite
+
 var _velocity := Vector2.ZERO
 var _h_direction := 0.0
 
@@ -29,7 +31,12 @@ func movement(delta: float) -> void:
 	if is_jumping():
 		_velocity.y = -jump_pow
 		
-	
+	if _velocity.x > 0:
+		sprite.flip_h = true
+	if _velocity.x < 0:
+		sprite.flip_h = false		
+
+
 func is_block_push() -> void:
 	_velocity.y = jump_pow
 	
