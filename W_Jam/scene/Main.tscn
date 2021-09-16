@@ -1,17 +1,48 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=20 format=2]
 
-[ext_resource path="res://scene/SideScreen.tscn" type="PackedScene" id=1]
-[ext_resource path="res://image/BG.png" type="Texture" id=2]
-[ext_resource path="res://image/ROBO_body.png" type="Texture" id=3]
-[ext_resource path="res://image/ROBO_left.png" type="Texture" id=4]
-[ext_resource path="res://image/ROBO_right.png" type="Texture" id=5]
-[ext_resource path="res://image/ROBO_left_jet.png" type="Texture" id=6]
+[ext_resource path="res://image/window_change_1.png" type="Texture" id=1]
+[ext_resource path="res://scene/PlayerScene.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scene/TargetBlock.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scene/Player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scene/Partition.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scene/PowerBlock.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scene/Main.gd" type="Script" id=7]
+[ext_resource path="res://image/arrow.png" type="Texture" id=8]
+[ext_resource path="res://scene/Cockpit.tscn" type="PackedScene" id=9]
 
 [sub_resource type="Animation" id=3]
-resource_name = "default"
+resource_name = "power_arrow"
+length = 3.0
 tracks/0/type = "value"
-tracks/0/path = NodePath("ROBO_left:position")
+tracks/0/path = NodePath("arrows/power_arrow:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.9, 1.3, 1.7, 2.2, 2.6, 2.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.658824 ), Color( 2, 2, 2, 1 ), Color( 1, 1, 1, 0.772549 ), Color( 2, 2, 2, 1 ), Color( 1, 1, 1, 0.764706 ), Color( 2, 2, 2, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("arrows/power_arrow:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "reset"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -20,10 +51,10 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 38.415, 48 ) ]
+"values": [ Color( 1, 1, 1, 0 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("ROBO_left:scale")
+tracks/1/path = NodePath("arrows/sit_arrow:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -31,11 +62,11 @@ tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 7, 7 ) ]
+"update": 1,
+"values": [ false ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("ROBO_left/Light2D:enabled")
+tracks/2/path = NodePath("arrows/power_arrow:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -47,7 +78,7 @@ tracks/2/keys = {
 "values": [ false ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("ROBO_left:texture")
+tracks/3/path = NodePath("arrows/target_arrows:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -56,167 +87,217 @@ tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ ExtResource( 4 ) ]
+"values": [ false ]
 }
 
-[sub_resource type="Animation" id=4]
-resource_name = "left_ready"
-loop = true
+[sub_resource type="Animation" id=5]
+resource_name = "sit_arrow"
+length = 3.0
 tracks/0/type = "value"
-tracks/0/path = NodePath("ROBO_left:offset")
+tracks/0/path = NodePath("arrows/sit_arrow:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1 ),
-"transitions": PoolRealArray( 0.68302, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.4, 0.7, 1.1, 1.5, 1.9, 2.3, 2.7, 3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( -0.1, 0.1 ), Vector2( 0.2, 0 ), Vector2( -0.2, 0 ), Vector2( 0, 0.2 ), Vector2( 0, -0.2 ), Vector2( 0.1, 0.1 ) ]
+"values": [ Color( 1, 1, 1, 1 ), Color( 2, 2, 2, 1 ), Color( 1, 1, 1, 0.698039 ), Color( 2, 2, 2, 1 ), Color( 1, 1, 1, 1 ), Color( 2, 2, 2, 1 ), Color( 1, 1, 1, 0.698039 ), Color( 2, 2, 2, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("ROBO_left/Light2D:energy")
+tracks/1/path = NodePath("arrows/sit_arrow:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ 1.28, 1.35, 1.51, 1.43, 1.66, 1.13 ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("ROBO_left/Light2D:texture_scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0.014776, 0.2, 0.4, 0.6, 0.8, 1 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ 10.5, 11.43, 10.02, 11.44, 10.49, 11.44 ]
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
 }
 
-[sub_resource type="Animation" id=1]
-resource_name = "left_shot"
+[sub_resource type="Animation" id=6]
+resource_name = "target_arrow"
+length = 3.0
 tracks/0/type = "value"
-tracks/0/path = NodePath("ROBO_left:position")
+tracks/0/path = NodePath("arrows/target_arrows/tar_arrow1:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 7.21, 1.18921 ),
+"times": PoolRealArray( 0, 0.4, 0.8, 1.2, 1.6, 2, 2.4, 2.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 38.415, 48 ), Vector2( 382.415, -352 ) ]
+"values": [ Color( 1, 1, 1, 1 ), Color( 2, 2, 2, 1 ), Color( 1, 1, 1, 0.792157 ), Color( 2, 2, 2, 1 ), Color( 1, 1, 1, 0.85098 ), Color( 2, 2, 2, 1 ), Color( 1, 1, 1, 0.952941 ), Color( 1, 1, 1, 1 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("ROBO_left:texture")
+tracks/1/path = NodePath("arrows/target_arrows/tar_arrow2:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ ExtResource( 4 ), ExtResource( 6 ) ]
+"times": PoolRealArray( 0, 0.4, 0.8, 1.2, 1.6, 2, 2.4, 2.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.807843 ), Color( 2, 2, 2, 1 ), Color( 1, 1, 1, 0.776471 ), Color( 2, 2, 2, 1 ), Color( 1, 1, 1, 0.741176 ), Color( 2, 2, 2, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("ROBO_left:scale")
+tracks/2/path = NodePath("arrows/target_arrows:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.1, 1 ),
-"transitions": PoolRealArray( 4.14106, 1, 4.14106 ),
-"update": 0,
-"values": [ Vector2( 7, 7 ), Vector2( 10.17, 10.17 ), Vector2( 23, 23 ) ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("ROBO_left/Light2D:enabled")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("ROBO_left/Light2D:energy")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0, 1 ),
+"times": PoolRealArray( 0, 3 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 1.51, 2.04 ]
+"update": 1,
+"values": [ true, false ]
 }
 
-[sub_resource type="CapsuleShape2D" id=2]
-radius = 60.1563
-height = 36.7831
+[sub_resource type="Animation" id=7]
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 2.82843 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
 
-[node name="Main" type="Node2D"]
+[sub_resource type="GDScript" id=1]
+script/source = "extends Area2D
+
+onready var light :Light2D = $Light2D
+onready var red_light :Light2D = $Switch/RedLight
+onready var green_light :Light2D = $Switch/GreenLight
+onready var icon_light :Light2D = $Icon/Light2D
+
+
+
+func _ready() -> void:
+	switch_reset()
+
+func switch_reset() -> void:
+	light.hide()
+	red_light.show()
+	green_light.hide()
+	icon_light.hide()
+
+
+
+func _on_TargetBlock_body_entered(body: Node) -> void:
+	light.show()
+	red_light.hide()
+	green_light.show()
+	icon_light.show()
+	
+	$Sprite.frame = 1
+	body.is_block_push()
+	print(\"tar_block_push\")
+
+"
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 1087.61, 10 )
+
+[sub_resource type="StreamTexture" id=8]
+load_path = "res://.import/arrow.png-c5d4aeafa5e83d479b16c85659c2845e.stex"
+
+[sub_resource type="StreamTexture" id=9]
+load_path = "res://.import/arrow.png-c5d4aeafa5e83d479b16c85659c2845e.stex"
+
+[sub_resource type="StreamTexture" id=10]
+load_path = "res://.import/arrow.png-c5d4aeafa5e83d479b16c85659c2845e.stex"
+
+[node name="Main" type="Node2D" groups=[
+"main",
+]]
+position = Vector2( -2, 0 )
 script = ExtResource( 7 )
 
-[node name="SideScreen1" parent="." instance=ExtResource( 1 )]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/power_arrow = SubResource( 3 )
+anims/reset = SubResource( 4 )
+anims/sit_arrow = SubResource( 5 )
+anims/target_arrow = SubResource( 6 )
+anims/window_change = SubResource( 7 )
 
-[node name="PlayerScene" type="Node2D" parent="."]
+[node name="Cockpit" parent="." instance=ExtResource( 9 )]
+position = Vector2( 436, 540 )
 
-[node name="TextureRect" type="TextureRect" parent="PlayerScene"]
-margin_left = 2.0
-margin_right = 888.0
-margin_bottom = 459.0
-size_flags_horizontal = 15
-size_flags_vertical = 15
-texture = ExtResource( 2 )
-expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="PlayerScene" parent="." instance=ExtResource( 2 )]
 
-[node name="MajinRouZ" type="StaticBody2D" parent="PlayerScene"]
-position = Vector2( 305.585, 240 )
+[node name="TargetBlock" parent="." instance=ExtResource( 3 )]
+position = Vector2( 818, 278.481 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="PlayerScene/MajinRouZ"]
-autoplay = "default"
-anims/default = SubResource( 3 )
-anims/left_ready = SubResource( 4 )
-anims/left_shot = SubResource( 1 )
+[node name="TargetBlock2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 958, 278.481 )
+script = SubResource( 1 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerScene/MajinRouZ"]
+[node name="Icon" parent="TargetBlock2" index="6"]
+flip_h = true
+
+[node name="Player" parent="." instance=ExtResource( 4 )]
+position = Vector2( 59, -1127 )
+
+[node name="Partition" parent="." instance=ExtResource( 5 )]
+position = Vector2( 8.42413, 21.7148 )
+
+[node name="PowerBlock" parent="." instance=ExtResource( 6 )]
+position = Vector2( 674.198, 348 )
+scale = Vector2( 1.5, 1.2 )
+
+[node name="KinematicBody2D" type="KinematicBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
+position = Vector2( 511.244, 611.357 )
 shape = SubResource( 2 )
 
-[node name="ROBO_body" type="Sprite" parent="PlayerScene/MajinRouZ"]
-position = Vector2( 0.956268, 8.069 )
-scale = Vector2( 7, 7 )
-texture = ExtResource( 3 )
+[node name="Sprite" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+scale = Vector2( 0.568359, 0.74 )
+texture = ExtResource( 1 )
+centered = false
 
-[node name="ROBO_left" type="Sprite" parent="PlayerScene/MajinRouZ"]
-position = Vector2( 38.415, 48 )
-scale = Vector2( 7, 7 )
-texture = ExtResource( 4 )
-offset = Vector2( -0.030497, 0.169503 )
+[node name="arrows" type="Node2D" parent="."]
 
-[node name="Light2D" type="Light2D" parent="PlayerScene/MajinRouZ/ROBO_left"]
-position = Vector2( -3.42856, 3.42856 )
-scale = Vector2( 0.142857, 0.142857 )
-texture = ExtResource( 4 )
-texture_scale = 11.2235
-color = Color( 0.443137, 0.317647, 0.0941176, 1 )
-energy = 1.51
+[node name="sit_arrow" type="Sprite" parent="arrows"]
+visible = false
+position = Vector2( 59, 524 )
+rotation = -3.14159
+scale = Vector2( 1.5, 1.2 )
+texture = ExtResource( 8 )
 
-[node name="ROBO_right" type="Sprite" parent="PlayerScene/MajinRouZ"]
-position = Vector2( -41.585, 48 )
-scale = Vector2( 7, 7 )
-texture = ExtResource( 5 )
+[node name="power_arrow" type="Sprite" parent="arrows"]
+position = Vector2( 674.396, 450 )
+scale = Vector2( 2, 1.8 )
+texture = SubResource( 8 )
+
+[node name="target_arrows" type="Node2D" parent="arrows"]
+visible = false
+
+[node name="tar_arrow1" type="Sprite" parent="arrows/target_arrows"]
+position = Vector2( 918, 348 )
+rotation = 0.698132
+scale = Vector2( 1.5, 1.2 )
+texture = SubResource( 9 )
+
+[node name="tar_arrow2" type="Sprite" parent="arrows/target_arrows"]
+position = Vector2( 858, 348 )
+rotation = -0.698132
+scale = Vector2( 1.5, 1.2 )
+texture = SubResource( 10 )
+
+[connection signal="body_entered" from="PowerBlock" to="." method="_on_PowerBlock_body_entered"]
+
+[editable path="TargetBlock2"]
+[editable path="PowerBlock"]

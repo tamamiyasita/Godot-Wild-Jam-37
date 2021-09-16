@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scene/E_ParallaxBackground.gd" type="Script" id=1]
+[ext_resource path="res://image/BG_E.png" type="Texture" id=2]
+[ext_resource path="res://scene/TalkPop.tscn" type="PackedScene" id=3]
+
+[node name="EnemyScene" type="Node2D"]
+z_index = -1
+
+[node name="TalkPop" parent="." instance=ExtResource( 3 )]
+position = Vector2( 293, 403 )
+
+[node name="E_ParallaxBackground" type="ParallaxBackground" parent="."]
+script = ExtResource( 1 )
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="E_ParallaxBackground"]
+motion_scale = Vector2( 0.02, 1 )
+motion_mirroring = Vector2( 1024, 600 )
+
+[node name="Sprite" type="Sprite" parent="E_ParallaxBackground/ParallaxLayer"]
+position = Vector2( 591, 225 )
+scale = Vector2( 3.94, 4.5 )
+texture = ExtResource( 2 )

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/BG.png-bdaf96a74affb8afe4e974da614d851a.stex"
+path="res://.import/rou6_throw.png-3f09fde434a086e0b73d21ff71264ae6.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://image/BG.png"
-dest_files=[ "res://.import/BG.png-bdaf96a74affb8afe4e974da614d851a.stex" ]
+source_file="res://image/rou6_throw.png"
+dest_files=[ "res://.import/rou6_throw.png-3f09fde434a086e0b73d21ff71264ae6.stex" ]
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
-flags/repeat=1
+flags/repeat=0
 flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false

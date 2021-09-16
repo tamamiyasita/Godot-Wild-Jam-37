@@ -1,0 +1,160 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://image/Sandstorm.png" type="Texture" id=1]
+[ext_resource path="res://image/pop.png" type="Texture" id=2]
+[ext_resource path="res://image/chara_sheet.png" type="Texture" id=3]
+[ext_resource path="res://font/Gugi-Regular.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://scene/TalkPop.gd" type="Script" id=5]
+[ext_resource path="res://Massage/Message1.gd" type="Script" id=7]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Sandstorm"
+length = 3.0
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sandstorm:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.06, 0.12, 0.2, 0.26, 0.32, 0.37, 0.42, 0.46, 0.52, 0.6, 0.65, 0.72, 0.79, 0.86, 0.91, 0.97, 1.03, 1.1, 1.17, 1.25, 1.31, 1.37, 1.43, 1.49, 1.55, 1.6, 1.66, 1.71, 1.76 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 0, 3, 2, 3, 2, 0, 1, 3, 2, 2, 1, 1, 0, 1, 3, 3, 3, 2, 2, 3, 3, 0, 1, 3, 0, 2 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Chara:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.83 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sandstorm:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1.82 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="DynamicFont" id=2]
+size = 19
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 19
+font_data = ExtResource( 4 )
+
+[sub_resource type="GDScript" id=4]
+script/source = "extends Node
+
+export (String, MULTILINE) var message = \"\"
+"
+
+[node name="TalkPop" type="Sprite" groups=[
+"talk",
+]]
+position = Vector2( 296, 411 )
+texture = ExtResource( 2 )
+script = ExtResource( 5 )
+
+[node name="Chara" type="Sprite" parent="."]
+visible = false
+position = Vector2( -232, 10 )
+scale = Vector2( 4.5, 4.5 )
+texture = ExtResource( 3 )
+
+[node name="Sandstorm" type="Sprite" parent="."]
+position = Vector2( -239.5, -0.500031 )
+scale = Vector2( 3.24, 0.67 )
+texture = ExtResource( 1 )
+hframes = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Sandstorm = SubResource( 1 )
+
+[node name="PopText" type="Label" parent="."]
+margin_left = -184.0
+margin_top = -11.0
+margin_right = 284.0
+margin_bottom = 38.0
+custom_fonts/font = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Name" type="Label" parent="."]
+margin_left = -191.0
+margin_top = -36.0
+margin_right = 285.0
+margin_bottom = -11.0
+custom_fonts/font = SubResource( 3 )
+text = "[Rou]"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DamageDialogue" type="Node" parent="."]
+
+[node name="Message1" type="Node" parent="DamageDialogue"]
+script = ExtResource( 7 )
+message = "Aaarrrgggghhhhh!"
+
+[node name="Message2" type="Node" parent="DamageDialogue"]
+script = SubResource( 4 )
+message = "I won't forgive you, even if you cry."
+
+[node name="Message3" type="Node" parent="DamageDialogue"]
+script = SubResource( 4 )
+message = "Hey, look what you did to my machine here."
+
+[node name="Message4" type="Node" parent="DamageDialogue"]
+script = SubResource( 4 )
+message = "You'll pay for this!"
+
+[node name="AttackDialogue" type="Node" parent="."]
+
+[node name="Message1" type="Node" parent="AttackDialogue"]
+script = ExtResource( 7 )
+message = "You and MazinRouZ will defeat you!"
+
+[node name="Message2" type="Node" parent="AttackDialogue"]
+script = SubResource( 4 )
+message = "I'll crush it right now!"
+
+[node name="Message3" type="Node" parent="AttackDialogue"]
+script = SubResource( 4 )
+message = "Take that!"
+
+[node name="Message4" type="Node" parent="AttackDialogue"]
+script = SubResource( 4 )
+message = "Alright, let's go! MazinRouZ!!"
+
+[node name="ShotDialogue" type="Node" parent="."]
+
+[node name="Message1" type="Node" parent="ShotDialogue"]
+script = ExtResource( 7 )
+message = "Rocket punch!!!!"
+
+[node name="Message2" type="Node" parent="ShotDialogue"]
+script = SubResource( 4 )
+message = "Launch rocket punch!"
+
+[node name="Message3" type="Node" parent="ShotDialogue"]
+script = SubResource( 4 )
+message = "Rocket Paroonchi! !! !!"
+
+[node name="Message4" type="Node" parent="ShotDialogue"]
+script = SubResource( 4 )
+message = "Rocket PUUUUUUNCH!!"
