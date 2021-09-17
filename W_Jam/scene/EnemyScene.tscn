@@ -1,11 +1,537 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://scene/E_ParallaxBackground.gd" type="Script" id=1]
 [ext_resource path="res://image/BG_E.png" type="Texture" id=2]
 [ext_resource path="res://scene/TalkPop.tscn" type="PackedScene" id=3]
+[ext_resource path="res://image/cheese_rat0.png" type="Texture" id=4]
+[ext_resource path="res://scene/Burst.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scene/EnemyScene.gd" type="Script" id=6]
+[ext_resource path="res://scene/GiantRat.gd" type="Script" id=7]
+[ext_resource path="res://image/ROBO_left_2.png" type="Texture" id=8]
+[ext_resource path="res://image/stop_lamp.png" type="Texture" id=9]
+[ext_resource path="res://scene/HpBar.tscn" type="PackedScene" id=10]
+[ext_resource path="res://font/Gugi-Regular.ttf" type="DynamicFontData" id=11]
+[ext_resource path="res://script/HPbox.gd" type="Script" id=12]
+[ext_resource path="res://image/beam.png" type="Texture" id=13]
+[ext_resource path="res://font/Dfont.tres" type="DynamicFont" id=14]
+[ext_resource path="res://image/HP_bar.png" type="Texture" id=15]
+[ext_resource path="res://scene/Dead.tscn" type="PackedScene" id=16]
 
-[node name="EnemyScene" type="Node2D"]
+[sub_resource type="DynamicFont" id=1]
+size = 35
+outline_size = 1
+font_data = ExtResource( 11 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 40
+outline_size = 1
+font_data = ExtResource( 11 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 19
+font_data = ExtResource( 11 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 54, 49 )
+
+[sub_resource type="StreamTexture" id=5]
+load_path = "res://.import/target_left.png-eeade047cae497b4c95fdfc7b4c3e087.stex"
+
+[sub_resource type="CircleShape2D" id=6]
+radius = 16.0
+
+[sub_resource type="CanvasItemMaterial" id=7]
+blend_mode = 1
+particles_animation = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id=8]
+min_value = -360.0
+max_value = 360.0
+_data = [ Vector2( 0.0107914, 261 ), 0.0, 0.0, 0, 0, Vector2( 0.165468, 360 ), 0.0, 0.0, 0, 0, Vector2( 0.593525, 18.8182 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=9]
+curve = SubResource( 8 )
+
+[sub_resource type="Gradient" id=10]
+offsets = PoolRealArray( 0.0196078, 0.109804, 0.160784, 0.34902, 0.45098, 0.85098, 0.996078 )
+colors = PoolColorArray( 1, 0.825447, 0.347656, 1, 1, 0.893176, 0.675781, 1, 0.97168, 0.461309, 0.0417519, 1, 0.94043, 0.611173, 0.462868, 1, 1, 0.37868, 0.226563, 1, 1, 0.17839, 0.0429688, 1, 1, 0, 0.090909, 1 )
+
+[sub_resource type="GradientTexture" id=11]
+gradient = SubResource( 10 )
+
+[sub_resource type="Curve" id=12]
+min_value = -400.0
+max_value = 400.0
+_data = [ Vector2( 0.0215827, 375.455 ), 0.0, 0.0, 0, 0, Vector2( 0.107914, 184.545 ), -1291.72, -1291.72, 0, 0, Vector2( 0.992806, -230.909 ), 551.405, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=13]
+curve = SubResource( 12 )
+
+[sub_resource type="Curve" id=14]
+min_value = 0.1
+max_value = 2.5
+_data = [ Vector2( 0.0395683, 2.5 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.184545 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=15]
+curve = SubResource( 14 )
+
+[sub_resource type="ParticlesMaterial" id=16]
+emission_shape = 3
+emission_point_count = 1
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 70, 0 )
+initial_velocity = 100.0
+initial_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 100.0
+linear_accel_random = 0.2
+linear_accel_curve = SubResource( 13 )
+radial_accel = 40.27
+radial_accel_random = 1.0
+angle = 72.5
+angle_random = 1.0
+angle_curve = SubResource( 9 )
+scale = 1.5
+scale_random = 1.0
+scale_curve = SubResource( 15 )
+color_ramp = SubResource( 11 )
+anim_speed = 59.28
+anim_speed_random = 1.0
+
+[sub_resource type="StreamTexture" id=17]
+load_path = "res://.import/hana.png-f75b35418ad83ca56789b54827c953d3.stex"
+
+[sub_resource type="StreamTexture" id=18]
+load_path = "res://.import/target_right.png-65026acbf49631c5b322ba4b3a15ae49.stex"
+
+[sub_resource type="CircleShape2D" id=19]
+radius = 16.0
+
+[sub_resource type="Animation" id=20]
+resource_name = "Beam"
+length = 1.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("Beam:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.1, 0.2, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.2, 2 ), Vector2( 13.144, 4.758 ), Vector2( 13, 3 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Beam:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.7, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Beam/Light2D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Damagetext3:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.1, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+
+[sub_resource type="Animation" id=21]
+resource_name = "dead"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Dead:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.6, 2.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 2, 2 ), Vector2( 3.84615, 3.84615 ), Vector2( 7, 7 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Dead:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 2.6, 2.9 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Dead/Particles2D:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.6, 1.7, 1.9, 2, 2.1, 2.2, 2.3, 2.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Dead/Particles2D2:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.1, 0.2, 0.4, 0.5, 0.7, 0.9, 1, 1.2, 1.3, 1.5, 1.6, 1.8, 2, 2.1, 2.3, 2.4, 2.6, 2.7, 2.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true ]
+}
+
+[sub_resource type="Animation" id=22]
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("L_punch:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 650, -286 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Targets/Left/Burst/Particles2D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Targets/Left/Sprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.3 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=23]
+length = 2.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Targets/Left:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.3 ),
+"transitions": PoolRealArray( -2, -2 ),
+"update": 0,
+"values": [ Vector2( 292, 0 ), Vector2( 48, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Targets/Left/Sprite:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=24]
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("L_punch:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 650, -286 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("L_punch:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.7, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 10, 10 ), Vector2( 3, 3 ), Vector2( 2, 2 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Targets/Left/Sprite:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 1.5 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=25]
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Targets/Right/Burst/Particles2D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("R_punch:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -92, -286 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Targets/Right/Sprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.3 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=26]
+length = 2.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Targets/Right:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.3 ),
+"transitions": PoolRealArray( -2, -2 ),
+"update": 0,
+"values": [ Vector2( 48, 0 ), Vector2( 292, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Targets/Right/Sprite:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=27]
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("R_punch:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.6, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 10, 10 ), Vector2( 3, 3 ), Vector2( 2, 2 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("R_punch:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -92, -286 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Targets/Right/Sprite:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 1.5 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="StreamTexture" id=28]
+load_path = "res://.import/ROBO_left_2.png-afa299a218c28c8b60549a25692a05c4.stex"
+
+[node name="EnemyScene" type="Node2D" groups=[
+"enemy_scene",
+]]
 z_index = -1
+script = ExtResource( 6 )
+
+[node name="Damagetext1" type="RichTextLabel" parent="."]
+margin_left = 148.0
+margin_top = 163.0
+margin_right = 285.0
+margin_bottom = 201.0
+custom_fonts/normal_font = ExtResource( 14 )
+custom_colors/default_color = Color( 1, 0.054902, 0.054902, 1 )
+bbcode_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Damagetext2" type="RichTextLabel" parent="."]
+margin_left = 324.0
+margin_top = 161.0
+margin_right = 591.0
+margin_bottom = 201.0
+custom_fonts/normal_font = SubResource( 1 )
+custom_colors/default_color = Color( 1, 0.0313726, 0.0313726, 1 )
+bbcode_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Damagetext3" type="RichTextLabel" parent="."]
+visible = false
+margin_left = 275.0
+margin_top = 158.0
+margin_right = 616.0
+margin_bottom = 221.0
+custom_fonts/normal_font = SubResource( 2 )
+custom_colors/default_color = Color( 0.952941, 0.686275, 0.305882, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+bbcode_enabled = true
+text = "squeak squeak!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GiantRat" type="Area2D" parent="."]
+position = Vector2( 271, 239 )
+script = ExtResource( 7 )
+
+[node name="HPbox" type="Control" parent="GiantRat"]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="GiantRat/HPbox"]
+modulate = Color( 0.0588235, 0.301961, 0.811765, 1 )
+margin_left = -262.0
+margin_top = -239.0
+margin_right = -42.0
+margin_bottom = -181.0
+texture = ExtResource( 9 )
+region_rect = Rect2( 3, 25, 24, 54 )
+patch_margin_left = 5
+patch_margin_top = 31
+patch_margin_right = 8
+patch_margin_bottom = 27
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Hptext" type="RichTextLabel" parent="GiantRat/HPbox"]
+margin_left = -257.0
+margin_top = -236.0
+margin_right = -62.0
+margin_bottom = -215.0
+custom_fonts/normal_font = SubResource( 3 )
+bbcode_enabled = true
+bbcode_text = "HP"
+text = "HP"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HpBar" parent="GiantRat/HPbox" instance=ExtResource( 10 )]
+margin_left = -42.0
+margin_top = -214.0
+margin_right = -13.0
+margin_bottom = 1.0
+texture_progress = ExtResource( 15 )
+tint_progress = Color( 1, 1, 1, 1 )
+
+[node name="Sprite" type="Sprite" parent="GiantRat"]
+scale = Vector2( 7, 7 )
+texture = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GiantRat"]
+position = Vector2( 7, 24 )
+shape = SubResource( 4 )
 
 [node name="TalkPop" parent="." instance=ExtResource( 3 )]
 position = Vector2( 293, 403 )
@@ -21,3 +547,111 @@ motion_mirroring = Vector2( 1024, 600 )
 position = Vector2( 591, 225 )
 scale = Vector2( 3.94, 4.5 )
 texture = ExtResource( 2 )
+
+[node name="Targets" type="Node2D" parent="."]
+position = Vector2( -50, 263 )
+scale = Vector2( 2, 2 )
+
+[node name="Left" type="Area2D" parent="Targets"]
+position = Vector2( 292, 0 )
+collision_layer = 4
+
+[node name="Sprite" type="Sprite" parent="Targets/Left"]
+visible = false
+texture = SubResource( 5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Targets/Left"]
+shape = SubResource( 6 )
+
+[node name="Burst" parent="Targets/Left" instance=ExtResource( 5 )]
+scale = Vector2( 0.5, 0.5 )
+
+[node name="Particles2D" parent="Targets/Left/Burst" index="0"]
+material = SubResource( 7 )
+scale = Vector2( 3, 3 )
+emitting = false
+amount = 200
+one_shot = true
+process_material = SubResource( 16 )
+texture = SubResource( 17 )
+
+[node name="Right" type="Area2D" parent="Targets"]
+position = Vector2( 48, 0 )
+collision_layer = 2
+
+[node name="Sprite" type="Sprite" parent="Targets/Right"]
+texture = SubResource( 18 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Targets/Right"]
+shape = SubResource( 19 )
+
+[node name="Burst" parent="Targets/Right" instance=ExtResource( 5 )]
+scale = Vector2( 0.5, 0.5 )
+
+[node name="Particles2D" parent="Targets/Right/Burst" index="0"]
+scale = Vector2( 3, 3 )
+emitting = false
+amount = 200
+one_shot = true
+
+[node name="Leftanime" type="AnimationPlayer" parent="."]
+anims/Beam = SubResource( 20 )
+anims/dead = SubResource( 21 )
+anims/left_burst = SubResource( 22 )
+anims/left_move = SubResource( 23 )
+anims/left_shot = SubResource( 24 )
+
+[node name="L_punch" type="Sprite" parent="."]
+position = Vector2( 650, -286 )
+scale = Vector2( 10, 10 )
+texture = ExtResource( 8 )
+offset = Vector2( 6.85714, -11 )
+
+[node name="Rightanime" type="AnimationPlayer" parent="."]
+anims/right_burst = SubResource( 25 )
+anims/right_move = SubResource( 26 )
+anims/right_shot = SubResource( 27 )
+
+[node name="R_punch" type="Sprite" parent="."]
+position = Vector2( -92, -286 )
+scale = Vector2( 2, 2 )
+texture = SubResource( 28 )
+offset = Vector2( -7.14285, -11.4286 )
+flip_h = true
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="Beam" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 315, 274 )
+scale = Vector2( 13, 3 )
+texture = ExtResource( 13 )
+offset = Vector2( 45.0107, -2.03982 )
+
+[node name="Light2D" type="Light2D" parent="Beam"]
+visible = false
+position = Vector2( 9.26925, -2 )
+scale = Vector2( 0.252137, 1 )
+texture = ExtResource( 13 )
+
+[node name="Dead" parent="." instance=ExtResource( 16 )]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 279, 227 )
+scale = Vector2( 7, 7 )
+
+[node name="Particles2D" parent="Dead" index="0"]
+emitting = true
+
+[node name="Particles2D2" parent="Dead" index="1"]
+emitting = true
+
+[connection signal="update_hp" from="." to="GiantRat" method="_on_EnemyScene_update_hp"]
+[connection signal="area_entered" from="Targets/Left" to="." method="_on_Left_area_entered"]
+[connection signal="area_exited" from="Targets/Left" to="." method="_on_Left_area_exited"]
+[connection signal="area_entered" from="Targets/Right" to="." method="_on_Right_area_entered"]
+[connection signal="area_exited" from="Targets/Right" to="." method="_on_Right_area_exited"]
+[connection signal="tween_completed" from="Tween" to="." method="_on_Tween_tween_completed"]
+
+[editable path="Targets/Left/Burst"]
+[editable path="Targets/Right/Burst"]
+[editable path="Dead"]

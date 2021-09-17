@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://image/V_wall.png" type="Texture" id=1]
 [ext_resource path="res://image/joint.png" type="Texture" id=2]
@@ -14,6 +14,21 @@ extents = Vector2( 8, 320 )
 extents = Vector2( 8, 476 )
 
 [sub_resource type="Animation" id=4]
+resource_name = "door1_close"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Door1:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ -90.0, 0.0 ]
+}
+
+[sub_resource type="Animation" id=5]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Door1:rotation_degrees")
 tracks/0/interp = 1
@@ -27,7 +42,22 @@ tracks/0/keys = {
 "values": [ 0.0, -90.0 ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=6]
+resource_name = "door2_close"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Door2:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ -90.0, 0.0 ]
+}
+
+[sub_resource type="Animation" id=7]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Door2:rotation_degrees")
 tracks/0/interp = 1
@@ -41,8 +71,7 @@ tracks/0/keys = {
 "values": [ 0.0, -90.0 ]
 }
 
-[sub_resource type="Animation" id=6]
-resource_name = "stand_move"
+[sub_resource type="Animation" id=8]
 length = 3.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("Stand:position")
@@ -57,26 +86,25 @@ tracks/0/keys = {
 "values": [ Vector2( 980, 404 ), Vector2( 900, 404 ), Vector2( 980, 404 ) ]
 }
 
-[sub_resource type="StreamTexture" id=7]
+[sub_resource type="StreamTexture" id=9]
 load_path = "res://.import/V_wall.png-dedc987459aa699dbaad86d67998a7ad.stex"
 
-[sub_resource type="CapsuleShape2D" id=8]
+[sub_resource type="CapsuleShape2D" id=10]
 radius = 8.0
 height = 65.8713
-
-[sub_resource type="CapsuleShape2D" id=9]
-radius = 8.0
-height = 65.8713
-
-[sub_resource type="StreamTexture" id=10]
-load_path = "res://.import/V_wall.png-dedc987459aa699dbaad86d67998a7ad.stex"
 
 [sub_resource type="CapsuleShape2D" id=11]
 radius = 8.0
 height = 65.8713
 
-[sub_resource type="Animation" id=12]
-resource_name = "move"
+[sub_resource type="StreamTexture" id=12]
+load_path = "res://.import/V_wall.png-dedc987459aa699dbaad86d67998a7ad.stex"
+
+[sub_resource type="CapsuleShape2D" id=13]
+radius = 8.0
+height = 65.8713
+
+[sub_resource type="Animation" id=14]
 length = 3.0
 loop = true
 tracks/0/type = "value"
@@ -136,16 +164,18 @@ scale = Vector2( 0.416667, 0.161459 )
 shape = SubResource( 3 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/door1_open = SubResource( 4 )
-anims/door2_open = SubResource( 5 )
-anims/stand_move = SubResource( 6 )
+anims/door1_close = SubResource( 4 )
+anims/door1_open = SubResource( 5 )
+anims/door2_close = SubResource( 6 )
+anims/door2_open = SubResource( 7 )
+anims/stand_move = SubResource( 8 )
 
 [node name="Door1" type="KinematicBody2D" parent="."]
 position = Vector2( 587.732, 485 )
 
 [node name="No1door" type="Sprite" parent="Door1"]
 scale = Vector2( 2.4, 0.842102 )
-texture = SubResource( 7 )
+texture = SubResource( 9 )
 offset = Vector2( 1.52588e-05, 47.8842 )
 
 [node name="Joint" type="Sprite" parent="Door1"]
@@ -153,14 +183,14 @@ texture = ExtResource( 2 )
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Door1"]
 position = Vector2( -0.000152588, 42 )
-shape = SubResource( 8 )
+shape = SubResource( 10 )
 
 [node name="Door2" type="KinematicBody2D" parent="."]
 position = Vector2( 744, 485 )
 
 [node name="No1door" type="Sprite" parent="Door2"]
 scale = Vector2( 2.4, 0.842102 )
-texture = SubResource( 7 )
+texture = SubResource( 9 )
 offset = Vector2( 1.52588e-05, 47.8842 )
 
 [node name="Joint" type="Sprite" parent="Door2"]
@@ -168,7 +198,7 @@ texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Door2"]
 position = Vector2( 0, 42 )
-shape = SubResource( 9 )
+shape = SubResource( 11 )
 
 [node name="Stand" type="KinematicBody2D" parent="."]
 position = Vector2( 1008, 380 )
@@ -177,7 +207,7 @@ rotation = 1.5708
 [node name="No1door" type="Sprite" parent="Stand"]
 position = Vector2( 0, 1.74402 )
 scale = Vector2( 2.4, 0.824285 )
-texture = SubResource( 10 )
+texture = SubResource( 12 )
 offset = Vector2( 1.52588e-05, 47.8842 )
 
 [node name="Joint" type="Sprite" parent="Stand"]
@@ -186,8 +216,8 @@ texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Stand"]
 position = Vector2( 0, 42 )
-shape = SubResource( 11 )
+shape = SubResource( 13 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Stand"]
 autoplay = "move"
-anims/move = SubResource( 12 )
+anims/move = SubResource( 14 )

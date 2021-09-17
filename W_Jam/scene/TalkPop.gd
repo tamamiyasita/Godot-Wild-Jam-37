@@ -24,10 +24,20 @@ func update_damage_text() -> void:
 	randomize()
 	var value :int= randi() % damage_text.get_child_count()
 	var message = damage_text.get_child(value)
-	pop_text = message.message
+	pop_text.text = message.message
 
+func sand_storm() -> void:
+	$Chara.hide()
+	$Sandstorm.show()
+	$AnimationPlayer.play('Sandstorm')
+	
+
+func show_rou() -> void:
+	$Sandstorm.hide()
+	$Chara.show()
 
 func opening() -> void:
 	$AnimationPlayer.play('Sandstorm')
 	yield(anime, "animation_finished" )
+	show_rou()
 	update_attack_text()

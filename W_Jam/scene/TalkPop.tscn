@@ -9,7 +9,7 @@
 
 [sub_resource type="Animation" id=1]
 resource_name = "Sandstorm"
-length = 3.0
+length = 1.8
 step = 0.01
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sandstorm:frame")
@@ -22,30 +22,6 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 1, 2, 3, 0, 3, 2, 3, 2, 0, 1, 3, 2, 2, 1, 1, 0, 1, 3, 3, 3, 2, 2, 3, 3, 0, 1, 3, 0, 2 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Chara:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 1.83 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ false, true ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Sandstorm:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 1.82 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, false ]
 }
 
 [sub_resource type="DynamicFont" id=2]
@@ -82,6 +58,7 @@ texture = ExtResource( 1 )
 hframes = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Sandstorm"
 anims/Sandstorm = SubResource( 1 )
 
 [node name="PopText" type="Label" parent="."]

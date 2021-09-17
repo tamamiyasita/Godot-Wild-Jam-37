@@ -11,7 +11,7 @@ config_version=4
 [application]
 
 config/name="W_Jam"
-run/main_scene="res://scene/Main.tscn"
+run/main_scene="res://scene/Title.tscn"
 config/icon="res://icon.png"
 
 [importer_defaults]
@@ -57,6 +57,11 @@ jump={
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777232,"unicode":0,"echo":false,"script":null)
  ]
 }
+
+[layer_names]
+
+2d_physics/layer_2="right_target"
+2d_physics/layer_3="left_target"
 
 [physics]
 

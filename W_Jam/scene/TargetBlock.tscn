@@ -9,10 +9,10 @@
 [ext_resource path="res://image/target_right_lamp.png" type="Texture" id=7]
 [ext_resource path="res://script/TargetBlock.gd" type="Script" id=8]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=12]
 extents = Vector2( 20.0331, 4.91822 )
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=13]
 extents = Vector2( 30.3823, 18.4266 )
 
 [node name="TargetBlock" type="Area2D"]
@@ -28,7 +28,7 @@ texture = ExtResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0.132307, 25.0751 )
-shape = SubResource( 1 )
+shape = SubResource( 12 )
 
 [node name="Sprite" type="Sprite" parent="."]
 light_mask = 2
@@ -46,7 +46,7 @@ range_item_cull_mask = 2
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-shape = SubResource( 2 )
+shape = SubResource( 13 )
 
 [node name="Switch" type="Sprite" parent="."]
 modulate = Color( 0.690196, 0.690196, 0.690196, 1 )

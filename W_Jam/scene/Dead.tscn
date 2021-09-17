@@ -1,0 +1,81 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://image/hana.png" type="Texture" id=1]
+[ext_resource path="res://image/burst_1.png" type="Texture" id=2]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+blend_mode = 1
+particles_animation = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id=2]
+offsets = PoolRealArray( 0.0196078, 0.109804, 0.160784, 0.34902, 0.45098, 0.85098, 0.996078 )
+colors = PoolColorArray( 1, 0.825447, 0.347656, 1, 1, 0.893176, 0.675781, 1, 0.97168, 0.461309, 0.0417519, 1, 0.94043, 0.611173, 0.462868, 1, 1, 0.37868, 0.226563, 1, 1, 0.17839, 0.0429688, 1, 1, 0, 0.090909, 1 )
+
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
+
+[sub_resource type="Curve" id=4]
+min_value = -400.0
+max_value = 400.0
+_data = [ Vector2( 0.0215827, 375.455 ), 0.0, 0.0, 0, 0, Vector2( 0.107914, 184.545 ), -1291.72, -1291.72, 0, 0, Vector2( 0.992806, -230.909 ), 551.405, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=5]
+curve = SubResource( 4 )
+
+[sub_resource type="Curve" id=6]
+min_value = 0.1
+max_value = 2.5
+_data = [ Vector2( 0.0395683, 2.5 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.184545 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=7]
+curve = SubResource( 6 )
+
+[sub_resource type="ParticlesMaterial" id=8]
+trail_divisor = 3
+emission_shape = 3
+emission_point_count = 1
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 70, 0 )
+initial_velocity = 200.67
+initial_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 100.0
+linear_accel_random = 0.2
+linear_accel_curve = SubResource( 5 )
+radial_accel = 40.27
+radial_accel_random = 1.0
+scale = 0.0
+scale_random = 1.0
+scale_curve = SubResource( 7 )
+color_ramp = SubResource( 3 )
+anim_speed = 59.28
+anim_speed_random = 1.0
+
+[node name="Dead" type="Node2D"]
+
+[node name="Particles2D" type="Particles2D" parent="."]
+material = SubResource( 1 )
+emitting = false
+amount = 27
+lifetime = 0.3
+one_shot = true
+explosiveness = 0.5
+draw_order = 1
+process_material = SubResource( 8 )
+texture = ExtResource( 2 )
+
+[node name="Particles2D2" type="Particles2D" parent="."]
+material = SubResource( 1 )
+emitting = false
+amount = 7
+lifetime = 0.6
+one_shot = true
+explosiveness = 0.5
+draw_order = 1
+process_material = SubResource( 8 )
+texture = ExtResource( 1 )

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://image/ROBO_right.png" type="Texture" id=1]
 [ext_resource path="res://image/ROBO_left_jet.png" type="Texture" id=2]
@@ -6,8 +6,11 @@
 [ext_resource path="res://image/ROBO_body.png" type="Texture" id=4]
 [ext_resource path="res://scene/MajinRouZ.gd" type="Script" id=5]
 [ext_resource path="res://image/ROBO_right_jet.png" type="Texture" id=6]
+[ext_resource path="res://image/stop_lamp.png" type="Texture" id=7]
+[ext_resource path="res://font/Gugi-Regular.ttf" type="DynamicFontData" id=8]
+[ext_resource path="res://scene/HpBar.tscn" type="PackedScene" id=9]
 
-[sub_resource type="Animation" id=1]
+[sub_resource type="Animation" id=15]
 resource_name = "default"
 tracks/0/type = "value"
 tracks/0/path = NodePath("ROBO_left:position")
@@ -57,50 +60,92 @@ tracks/3/keys = {
 "update": 1,
 "values": [ ExtResource( 3 ) ]
 }
+tracks/4/type = "value"
+tracks/4/path = NodePath("ROBO_right/Light2D2:enabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("ROBO_right:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -42.9149, 46.1451 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("ROBO_right:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 7.06416, 7.06416 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("ROBO_right:texture")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 1 ) ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("ROBO_left:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("ROBO_right:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("ROBO_body:texture")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 4 ) ]
+}
 
-[sub_resource type="Animation" id=2]
-resource_name = "left_ready"
-length = 0.6
-loop = true
-step = 0.05
-tracks/0/type = "value"
-tracks/0/path = NodePath("ROBO_left:offset")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.35, 0.45, 0.6 ),
-"transitions": PoolRealArray( 0.68302, 1, 1, 1, 1, 0.0412346 ),
-"update": 0,
-"values": [ Vector2( -0.1, 0.1 ), Vector2( 0.2, 0 ), Vector2( -0.2, 0 ), Vector2( 0, 0.2 ), Vector2( 0, -0.2 ), Vector2( 0, 0 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("ROBO_left/Light2D:energy")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1, 0.25, 0.3, 0.45, 0.55 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ 1.28, 1.35, 1.51, 1.43, 1.66, 1.13 ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("ROBO_left/Light2D:texture_scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0.014776, 0.1, 0.2, 0.35, 0.4, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ 10.5, 11.43, 10.02, 11.44, 10.49, 11.44 ]
-}
-
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=16]
 resource_name = "punch"
 length = 2.0
 tracks/0/type = "value"
@@ -200,9 +245,66 @@ tracks/7/keys = {
 "values": [ Vector2( 7, 7 ), Vector2( 23, 23 ) ]
 }
 
-[sub_resource type="CapsuleShape2D" id=4]
+[sub_resource type="Animation" id=17]
+length = 0.6
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("ROBO_left:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.35, 0.45, 0.6 ),
+"transitions": PoolRealArray( 0.68302, 1, 1, 1, 1, 0.0412346 ),
+"update": 0,
+"values": [ Vector2( -0.1, 0.1 ), Vector2( 0.2, 0 ), Vector2( -0.2, 0 ), Vector2( 0, 0.2 ), Vector2( 0, -0.2 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("ROBO_right:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.101, 0.2, 0.35, 0.45, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( -0.2, 0 ), Vector2( 0, 0 ), Vector2( 0.2, 0 ), Vector2( 0, -0.2 ), Vector2( 0, 0.2 ), Vector2( 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("ROBO_right/Light2D2:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.05 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("ROBO_left/Light2D:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.05 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+
+[sub_resource type="CapsuleShape2D" id=18]
 radius = 60.1563
 height = 36.7831
+
+[sub_resource type="DynamicFont" id=19]
+size = 19
+font_data = ExtResource( 8 )
 
 [node name="MajinRouZ" type="StaticBody2D" groups=[
 "majin",
@@ -212,12 +314,12 @@ script = ExtResource( 5 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "default"
-anims/default = SubResource( 1 )
-anims/left_ready = SubResource( 2 )
-anims/punch = SubResource( 3 )
+anims/default = SubResource( 15 )
+anims/punch = SubResource( 16 )
+anims/ready = SubResource( 17 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 4 )
+shape = SubResource( 18 )
 
 [node name="ROBO_body" type="Sprite" parent="."]
 position = Vector2( 0.956268, 8.069 )
@@ -228,25 +330,67 @@ texture = ExtResource( 4 )
 position = Vector2( 38.415, 48 )
 scale = Vector2( 7, 7 )
 texture = ExtResource( 3 )
-offset = Vector2( 0.17655, 0.00781667 )
+offset = Vector2( 0, -0.0336781 )
 
 [node name="Light2D" type="Light2D" parent="ROBO_left"]
 position = Vector2( -3.42856, 3.42856 )
 scale = Vector2( 0.142857, 0.142857 )
+enabled = false
 texture = ExtResource( 3 )
-texture_scale = 11.2386
-color = Color( 0.443137, 0.317647, 0.0941176, 1 )
+texture_scale = 10.6458
 energy = 1.51
 
 [node name="ROBO_right" type="Sprite" parent="."]
-position = Vector2( -43.1535, 45.8124 )
-scale = Vector2( 7.07567, 7.07567 )
+position = Vector2( -42.9149, 46.1451 )
+scale = Vector2( 7.06416, 7.06416 )
 texture = ExtResource( 1 )
+offset = Vector2( 0, 0.0336781 )
 
 [node name="Light2D2" type="Light2D" parent="ROBO_right"]
 position = Vector2( 1.73913, 1.73913 )
 scale = Vector2( 0.142857, 0.142857 )
+enabled = false
 texture = ExtResource( 1 )
 texture_scale = 11.2386
-color = Color( 0.443137, 0.317647, 0.0941176, 1 )
-energy = 1.51
+
+[node name="HPbox" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="HPbox"]
+modulate = Color( 0.0588235, 0.301961, 0.811765, 1 )
+margin_left = -262.0
+margin_top = -239.0
+margin_right = -42.0
+margin_bottom = -181.0
+texture = ExtResource( 7 )
+region_rect = Rect2( 3, 25, 24, 54 )
+patch_margin_left = 5
+patch_margin_top = 31
+patch_margin_right = 8
+patch_margin_bottom = 27
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Hptext" type="RichTextLabel" parent="HPbox"]
+margin_left = -257.0
+margin_top = -236.0
+margin_right = -62.0
+margin_bottom = -215.0
+custom_fonts/normal_font = SubResource( 19 )
+bbcode_enabled = true
+bbcode_text = "HP"
+text = "HP"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HpBar" parent="HPbox" instance=ExtResource( 9 )]
+margin_left = -42.0
+margin_top = -214.0
+margin_right = -13.0
+margin_bottom = 1.0

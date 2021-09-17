@@ -12,6 +12,7 @@ func _ready() -> void:
 
 func switch_reset() -> void:
 	light.hide()
+	$Sprite.frame = 0
 	anime.play('default')
 
 
@@ -23,3 +24,7 @@ func _on_EnterBlock_body_entered(body: Node) -> void:
 	var value = power_meter.value
 	get_tree().call_group("main", "power_set", value)
 	print("block_push")
+
+
+func _on_Main_switch_reset() -> void:
+	switch_reset()
