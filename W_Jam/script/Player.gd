@@ -16,10 +16,25 @@ var _velocity := Vector2.ZERO
 var _h_direction := 0.0
 
 
+func _ready() -> void:
+	set_process(false)
+	gravity = 0.0
+	yield(get_tree().create_timer(.4), "timeout")
+	gravity = 2100.0
+	yield(get_tree().create_timer(.5), "timeout")
+	set_process(true)
+
+
 func _process(delta: float) -> void:
 	movement(delta)
 
 	move_and_slide(_velocity, UP_DIRECTION)
+
+func move_on() -> void:
+	set_process(true)
+func move_off() -> void:
+	set_process(false)
+
 
 func movement(delta: float) -> void:
 	_h_direction = (
@@ -56,3 +71,7 @@ func is_block_push() -> void:
 
 func is_jumping() -> bool:
 	return Input.is_action_just_pressed('jump') and is_on_floor()
+
+
+func _on_Main_ready_player() -> void:
+	move_on()
