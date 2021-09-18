@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://image/hana.png" type="Texture" id=1]
 [ext_resource path="res://image/burst_1.png" type="Texture" id=2]
+[ext_resource path="res://scene/Dead.gd" type="Script" id=3]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 blend_mode = 1
@@ -56,13 +57,44 @@ color_ramp = SubResource( 3 )
 anim_speed = 59.28
 anim_speed_random = 1.0
 
+[sub_resource type="Animation" id=9]
+resource_name = "dead"
+length = 0.1
+loop = true
+step = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("Particles2D2:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6, 0.9, 1.2, 1.5, 1.8, 2.1, 2.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true, false, true, true, true, true, true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Particles2D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6, 0.9, 1.2, 1.5, 1.8, 2.1, 2.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true, false, true, true, true, true, true ]
+}
+
 [node name="Dead" type="Node2D"]
+scale = Vector2( 7, 7 )
+script = ExtResource( 3 )
 
 [node name="Particles2D" type="Particles2D" parent="."]
 material = SubResource( 1 )
-emitting = false
 amount = 27
-lifetime = 0.3
+lifetime = 0.25
 one_shot = true
 explosiveness = 0.5
 draw_order = 1
@@ -71,11 +103,13 @@ texture = ExtResource( 2 )
 
 [node name="Particles2D2" type="Particles2D" parent="."]
 material = SubResource( 1 )
-emitting = false
-amount = 7
-lifetime = 0.6
+amount = 12
+lifetime = 0.25
 one_shot = true
 explosiveness = 0.5
 draw_order = 1
 process_material = SubResource( 8 )
 texture = ExtResource( 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/dead = SubResource( 9 )

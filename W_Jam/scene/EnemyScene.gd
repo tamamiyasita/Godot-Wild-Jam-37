@@ -131,6 +131,7 @@ func left_attack_end() -> void:
 func Game_clear() -> void:
 	left_anime.play('dead')
 	yield(left_anime, "animation_finished" )
+	
 	get_tree().change_scene("res://scene/END.tscn")
 
 

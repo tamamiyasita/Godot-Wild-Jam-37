@@ -16,8 +16,7 @@ func _ready() -> void:
 	hp_bar.max_value = max_hp
 	hp_bar.value = hp
 	hp_text.bbcode_text = "HP {0} / {1}".format([hp, max_hp])
-	
-	
+#	Game_Over()
 	
 func update_hp(damage) -> void:
 	hp -= damage
@@ -27,6 +26,7 @@ func update_hp(damage) -> void:
 		pass
 		
 func Game_Over() -> void:
+	anime.stop()
 	anime.play('dead')
 	yield(anime, "animation_finished" )
 	get_tree().change_scene("res://scene/END.tscn")

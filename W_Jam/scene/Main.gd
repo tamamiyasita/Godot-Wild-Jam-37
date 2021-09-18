@@ -24,6 +24,7 @@ signal switch_reset
 func _ready() -> void:
 
 	set_process(false)
+	
 	anime.play('reset')
 	get_tree().call_group("talk", "opening")
 	player_turn()
@@ -58,6 +59,7 @@ func _process(delta: float) -> void:
 
 		POWER_ON:
 			if is_sit == true:
+				
 				print("ロケットパーンチ！")
 				punch()
 				get_tree().call_group("talk", "update_shot_text")
@@ -144,8 +146,13 @@ func damage_pop()->void:
 	emit_signal('hp_change', damage)
 	
 	yield(get_tree().create_timer(.5), "timeout")
+	
 	if Robo.hp < 1:
-		Robo.Game_Over()
+		set_process(false)
+		$Dead.dead()
+		yield(get_tree().create_timer(2.5), "timeout")
+		$Dead.stop()
+		get_tree().call_group("majin", "Game_Over")
 	else:
 		yield(get_tree().create_timer(.5), "timeout")
 		get_tree().call_group("talk", "update_damage_text")

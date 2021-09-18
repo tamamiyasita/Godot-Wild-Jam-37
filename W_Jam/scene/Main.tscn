@@ -1,4 +1,4 @@
-[gd_scene load_steps=79 format=2]
+[gd_scene load_steps=81 format=2]
 
 [ext_resource path="res://image/window_change_1.png" type="Texture" id=1]
 [ext_resource path="res://font/Gugi-Regular.ttf" type="DynamicFontData" id=2]
@@ -38,6 +38,7 @@
 [ext_resource path="res://image/ais.png" type="Texture" id=36]
 [ext_resource path="res://image/ROBO_H.png" type="Texture" id=37]
 [ext_resource path="res://image/ROBO.png" type="Texture" id=38]
+[ext_resource path="res://scene/Dead.tscn" type="PackedScene" id=39]
 
 [sub_resource type="Animation" id=1]
 resource_name = "damage"
@@ -334,7 +335,10 @@ size = 19
 font_data = ExtResource( 2 )
 
 [sub_resource type="Animation" id=9]
-resource_name = "default"
+resource_name = "dead"
+length = 3.0
+
+[sub_resource type="Animation" id=10]
 tracks/0/type = "value"
 tracks/0/path = NodePath("ROBO_left:position")
 tracks/0/interp = 1
@@ -492,8 +496,7 @@ tracks/12/keys = {
 "values": [ 0.0, 1.0, 0.0, 1.0, 0.0, 0.0 ]
 }
 
-[sub_resource type="Animation" id=10]
-resource_name = "gurd"
+[sub_resource type="Animation" id=11]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("ROBO_body:texture")
@@ -532,8 +535,7 @@ tracks/2/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=11]
-resource_name = "punch"
+[sub_resource type="Animation" id=12]
 length = 2.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("ROBO_left:position")
@@ -632,7 +634,7 @@ tracks/7/keys = {
 "values": [ Vector2( 7, 7 ), Vector2( 23, 23 ) ]
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=13]
 length = 0.6
 loop = true
 step = 0.05
@@ -685,8 +687,7 @@ tracks/3/keys = {
 "values": [ false, true ]
 }
 
-[sub_resource type="Animation" id=13]
-resource_name = "start_move"
+[sub_resource type="Animation" id=14]
 tracks/0/type = "value"
 tracks/0/path = NodePath("../ROBO_S:position")
 tracks/0/interp = 1
@@ -772,8 +773,7 @@ tracks/6/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="Animation" id=14]
-resource_name = "default"
+[sub_resource type="Animation" id=15]
 length = 5.0
 loop = true
 tracks/0/type = "value"
@@ -801,8 +801,7 @@ tracks/1/keys = {
 "values": [ 0.0, 0.4, 0.0, 0.4, 0.0, 0.0 ]
 }
 
-[sub_resource type="Animation" id=15]
-resource_name = "gurd"
+[sub_resource type="Animation" id=16]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("ROBO_body:texture")
@@ -841,8 +840,7 @@ tracks/2/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=16]
-resource_name = "punch"
+[sub_resource type="Animation" id=17]
 length = 2.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("ROBO_left:position")
@@ -941,7 +939,7 @@ tracks/7/keys = {
 "values": [ Vector2( 7, 7 ), Vector2( 23, 23 ) ]
 }
 
-[sub_resource type="Animation" id=17]
+[sub_resource type="Animation" id=18]
 length = 0.6
 loop = true
 step = 0.05
@@ -994,11 +992,11 @@ tracks/3/keys = {
 "values": [ false, true ]
 }
 
-[sub_resource type="CapsuleShape2D" id=18]
+[sub_resource type="CapsuleShape2D" id=19]
 radius = 60.1563
 height = 36.7831
 
-[sub_resource type="GDScript" id=19]
+[sub_resource type="GDScript" id=28]
 script/source = "extends Area2D
 
 onready var light :Light2D = $Light2D
@@ -1036,13 +1034,13 @@ func _on_Main_switch_reset() -> void:
 	switch_reset()
 "
 
-[sub_resource type="RectangleShape2D" id=20]
+[sub_resource type="RectangleShape2D" id=29]
 extents = Vector2( 20.0331, 4.91822 )
 
-[sub_resource type="RectangleShape2D" id=21]
+[sub_resource type="RectangleShape2D" id=30]
 extents = Vector2( 30.3823, 18.4266 )
 
-[sub_resource type="GDScript" id=22]
+[sub_resource type="GDScript" id=31]
 script/source = "extends Area2D
 
 onready var light :Light2D = $Light2D
@@ -1080,10 +1078,10 @@ func _on_Main_switch_reset() -> void:
 	switch_reset()
 "
 
-[sub_resource type="RectangleShape2D" id=23]
+[sub_resource type="RectangleShape2D" id=32]
 extents = Vector2( 1087.61, 10 )
 
-[sub_resource type="DynamicFont" id=24]
+[sub_resource type="DynamicFont" id=33]
 size = 12
 outline_size = 1
 outline_color = Color( 1, 0.258824, 0.258824, 1 )
@@ -1091,61 +1089,61 @@ use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 2 )
 
-[sub_resource type="DynamicFont" id=25]
+[sub_resource type="DynamicFont" id=34]
 size = 11
 outline_color = Color( 1, 0.258824, 0.258824, 1 )
 use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 2 )
 
-[sub_resource type="StreamTexture" id=26]
+[sub_resource type="StreamTexture" id=35]
 load_path = "res://.import/arrow.png-c5d4aeafa5e83d479b16c85659c2845e.stex"
 
-[sub_resource type="StreamTexture" id=27]
+[sub_resource type="StreamTexture" id=36]
 load_path = "res://.import/arrow.png-c5d4aeafa5e83d479b16c85659c2845e.stex"
 
-[sub_resource type="StreamTexture" id=28]
+[sub_resource type="StreamTexture" id=37]
 load_path = "res://.import/arrow.png-c5d4aeafa5e83d479b16c85659c2845e.stex"
 
-[sub_resource type="CanvasItemMaterial" id=29]
+[sub_resource type="CanvasItemMaterial" id=38]
 blend_mode = 1
 particles_animation = true
 particles_anim_h_frames = 1
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
-[sub_resource type="Curve" id=30]
+[sub_resource type="Curve" id=39]
 min_value = -360.0
 max_value = 360.0
 _data = [ Vector2( 0.0107914, 261 ), 0.0, 0.0, 0, 0, Vector2( 0.165468, 360 ), 0.0, 0.0, 0, 0, Vector2( 0.593525, 18.8182 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=31]
-curve = SubResource( 30 )
+[sub_resource type="CurveTexture" id=40]
+curve = SubResource( 39 )
 
-[sub_resource type="Gradient" id=32]
+[sub_resource type="Gradient" id=41]
 offsets = PoolRealArray( 0.0196078, 0.109804, 0.160784, 0.34902, 0.45098, 0.85098, 0.996078 )
 colors = PoolColorArray( 1, 0.825447, 0.347656, 1, 1, 0.893176, 0.675781, 1, 0.97168, 0.461309, 0.0417519, 1, 0.94043, 0.611173, 0.462868, 1, 1, 0.37868, 0.226563, 1, 1, 0.17839, 0.0429688, 1, 1, 0, 0.090909, 1 )
 
-[sub_resource type="GradientTexture" id=33]
-gradient = SubResource( 32 )
+[sub_resource type="GradientTexture" id=42]
+gradient = SubResource( 41 )
 
-[sub_resource type="Curve" id=34]
+[sub_resource type="Curve" id=43]
 min_value = -400.0
 max_value = 400.0
 _data = [ Vector2( 0.0215827, 375.455 ), 0.0, 0.0, 0, 0, Vector2( 0.107914, 184.545 ), -1291.72, -1291.72, 0, 0, Vector2( 0.992806, -230.909 ), 551.405, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=35]
-curve = SubResource( 34 )
+[sub_resource type="CurveTexture" id=44]
+curve = SubResource( 43 )
 
-[sub_resource type="Curve" id=36]
+[sub_resource type="Curve" id=45]
 min_value = 0.1
 max_value = 2.5
 _data = [ Vector2( 0.0395683, 2.5 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.184545 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=37]
-curve = SubResource( 36 )
+[sub_resource type="CurveTexture" id=46]
+curve = SubResource( 45 )
 
-[sub_resource type="ParticlesMaterial" id=38]
+[sub_resource type="ParticlesMaterial" id=47]
 emission_shape = 3
 emission_point_count = 1
 flag_disable_z = true
@@ -1157,28 +1155,28 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 linear_accel = 100.0
 linear_accel_random = 0.2
-linear_accel_curve = SubResource( 35 )
+linear_accel_curve = SubResource( 44 )
 radial_accel = 40.27
 radial_accel_random = 1.0
 angle = 72.5
 angle_random = 1.0
-angle_curve = SubResource( 31 )
+angle_curve = SubResource( 40 )
 scale = 1.5
 scale_random = 1.0
-scale_curve = SubResource( 37 )
-color_ramp = SubResource( 33 )
+scale_curve = SubResource( 46 )
+color_ramp = SubResource( 42 )
 anim_speed = 59.28
 anim_speed_random = 1.0
 
-[sub_resource type="DynamicFontData" id=39]
+[sub_resource type="DynamicFontData" id=48]
 font_path = "res://font/Gugi-Regular.ttf"
 
-[sub_resource type="DynamicFont" id=40]
+[sub_resource type="DynamicFont" id=49]
 size = 35
 outline_size = 1
 use_mipmaps = true
 use_filter = true
-font_data = SubResource( 39 )
+font_data = SubResource( 48 )
 
 [node name="Main" type="Node" groups=[
 "main",
@@ -1257,21 +1255,22 @@ tint_progress = Color( 1, 1, 1, 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="PlayerScene/MajinRouZ"]
 autoplay = "default"
-anims/default = SubResource( 9 )
-anims/gurd = SubResource( 10 )
-anims/punch = SubResource( 11 )
-anims/ready = SubResource( 12 )
-anims/start_move = SubResource( 13 )
+anims/dead = SubResource( 9 )
+anims/default = SubResource( 10 )
+anims/gurd = SubResource( 11 )
+anims/punch = SubResource( 12 )
+anims/ready = SubResource( 13 )
+anims/start_move = SubResource( 14 )
 
 [node name="AnimationPlayer2" type="AnimationPlayer" parent="PlayerScene/MajinRouZ"]
 autoplay = "default"
-anims/default = SubResource( 14 )
-anims/gurd = SubResource( 15 )
-anims/punch = SubResource( 16 )
-anims/ready = SubResource( 17 )
+anims/default = SubResource( 15 )
+anims/gurd = SubResource( 16 )
+anims/punch = SubResource( 17 )
+anims/ready = SubResource( 18 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerScene/MajinRouZ"]
-shape = SubResource( 18 )
+shape = SubResource( 19 )
 
 [node name="ROBO_body" type="Sprite" parent="PlayerScene/MajinRouZ"]
 visible = false
@@ -1292,7 +1291,6 @@ texture = ExtResource( 36 )
 energy = 0.0
 
 [node name="ROBO_left" type="Sprite" parent="PlayerScene/MajinRouZ"]
-visible = false
 position = Vector2( 38.415, 48 )
 scale = Vector2( 7, 7 )
 texture = ExtResource( 26 )
@@ -1306,7 +1304,6 @@ texture_scale = 10.6458
 energy = 1.51
 
 [node name="ROBO_right" type="Sprite" parent="PlayerScene/MajinRouZ"]
-visible = false
 position = Vector2( -42.9149, 46.1451 )
 scale = Vector2( 7.06416, 7.06416 )
 texture = ExtResource( 23 )
@@ -1346,7 +1343,7 @@ visible = false
 position = Vector2( 818, 278.481 )
 collision_layer = 3
 collision_mask = 3
-script = SubResource( 19 )
+script = SubResource( 28 )
 
 [node name="Sprite2" type="Sprite" parent="TargetBlock"]
 position = Vector2( 5.96046e-08, -30.5146 )
@@ -1355,7 +1352,7 @@ texture = ExtResource( 13 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TargetBlock"]
 position = Vector2( 0.132307, 25.0751 )
-shape = SubResource( 20 )
+shape = SubResource( 29 )
 
 [node name="Sprite" type="Sprite" parent="TargetBlock"]
 light_mask = 2
@@ -1373,7 +1370,7 @@ range_item_cull_mask = 2
 [node name="StaticBody2D" type="StaticBody2D" parent="TargetBlock"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TargetBlock/StaticBody2D"]
-shape = SubResource( 21 )
+shape = SubResource( 30 )
 
 [node name="Switch" type="Sprite" parent="TargetBlock"]
 modulate = Color( 0.690196, 0.690196, 0.690196, 1 )
@@ -1409,7 +1406,7 @@ energy = 1.2
 position = Vector2( 958, 278.481 )
 collision_layer = 3
 collision_mask = 3
-script = SubResource( 22 )
+script = SubResource( 31 )
 
 [node name="Sprite2" type="Sprite" parent="TargetBlock2"]
 position = Vector2( 5.96046e-08, -30.5146 )
@@ -1418,7 +1415,7 @@ texture = ExtResource( 13 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TargetBlock2"]
 position = Vector2( 0.132307, 25.0751 )
-shape = SubResource( 20 )
+shape = SubResource( 29 )
 
 [node name="Sprite" type="Sprite" parent="TargetBlock2"]
 light_mask = 2
@@ -1436,7 +1433,7 @@ range_item_cull_mask = 2
 [node name="StaticBody2D" type="StaticBody2D" parent="TargetBlock2"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TargetBlock2/StaticBody2D"]
-shape = SubResource( 21 )
+shape = SubResource( 30 )
 
 [node name="Switch" type="Sprite" parent="TargetBlock2"]
 modulate = Color( 0.690196, 0.690196, 0.690196, 1 )
@@ -1483,7 +1480,7 @@ scale = Vector2( 1.5, 1.2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
 position = Vector2( 511.244, 611.357 )
-shape = SubResource( 23 )
+shape = SubResource( 32 )
 
 [node name="Sprite" type="Sprite" parent="."]
 modulate = Color( 1, 1, 1, 0 )
@@ -1515,7 +1512,7 @@ anchor_bottom = 1.0
 margin_left = 4.0
 margin_right = -75.0
 margin_bottom = -35.0
-custom_fonts/normal_font = SubResource( 24 )
+custom_fonts/normal_font = SubResource( 33 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
 text = "warning"
 __meta__ = {
@@ -1529,7 +1526,7 @@ margin_left = 6.0
 margin_top = 16.0
 margin_right = -6.0
 margin_bottom = -3.0
-custom_fonts/normal_font = SubResource( 25 )
+custom_fonts/normal_font = SubResource( 34 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
 bbcode_enabled = true
 bbcode_text = "Let's hurry up and take our seats and get into a defensive position!"
@@ -1551,7 +1548,7 @@ texture = ExtResource( 8 )
 visible = false
 position = Vector2( 674.396, 450 )
 scale = Vector2( 2, 1.8 )
-texture = SubResource( 26 )
+texture = SubResource( 35 )
 
 [node name="target_arrows" type="Node2D" parent="arrows"]
 visible = false
@@ -1560,13 +1557,13 @@ visible = false
 position = Vector2( 918, 348 )
 rotation = 0.698132
 scale = Vector2( 1.5, 1.2 )
-texture = SubResource( 27 )
+texture = SubResource( 36 )
 
 [node name="tar_arrow2" type="Sprite" parent="arrows/target_arrows"]
 position = Vector2( 858, 348 )
 rotation = -0.698132
 scale = Vector2( 1.5, 1.2 )
-texture = SubResource( 28 )
+texture = SubResource( 37 )
 
 [node name="Beam" type="Sprite" parent="."]
 modulate = Color( 1, 1, 1, 0 )
@@ -1585,7 +1582,7 @@ texture = ExtResource( 31 )
 position = Vector2( 264, 280 )
 
 [node name="Particles2D" type="Particles2D" parent="Burst"]
-material = SubResource( 29 )
+material = SubResource( 38 )
 scale = Vector2( 1.1, 1.1 )
 emitting = false
 amount = 150
@@ -1593,11 +1590,11 @@ lifetime = 0.4
 one_shot = true
 explosiveness = 0.5
 draw_order = 1
-process_material = SubResource( 38 )
+process_material = SubResource( 47 )
 texture = ExtResource( 32 )
 
 [node name="Particles2D2" type="Particles2D" parent="Burst"]
-material = SubResource( 29 )
+material = SubResource( 38 )
 position = Vector2( 52, -17 )
 scale = Vector2( 1.2, 1.2 )
 emitting = false
@@ -1606,7 +1603,7 @@ lifetime = 0.6
 one_shot = true
 explosiveness = 0.5
 draw_order = 1
-process_material = SubResource( 38 )
+process_material = SubResource( 47 )
 texture = ExtResource( 32 )
 
 [node name="Damagetext" type="RichTextLabel" parent="."]
@@ -1614,7 +1611,7 @@ margin_left = 264.0
 margin_top = 144.0
 margin_right = 472.0
 margin_bottom = 200.0
-custom_fonts/normal_font = SubResource( 40 )
+custom_fonts/normal_font = SubResource( 49 )
 custom_colors/default_color = Color( 0.941176, 0.172549, 0.172549, 1 )
 bbcode_enabled = true
 __meta__ = {
@@ -1624,14 +1621,17 @@ __meta__ = {
 [node name="DamageTimer" type="Timer" parent="."]
 wait_time = 100.0
 
+[node name="Dead" parent="." instance=ExtResource( 39 )]
+position = Vector2( 304, 241.214 )
+
 [connection signal="hp_change" from="." to="PlayerScene/MajinRouZ" method="_on_Main_hp_change"]
-[connection signal="switch_reset" from="." to="PowerBlock" method="_on_Main_switch_reset"]
 [connection signal="switch_reset" from="." to="TargetBlock2" method="_on_Main_switch_reset"]
 [connection signal="switch_reset" from="." to="TargetBlock" method="_on_Main_switch_reset"]
-[connection signal="body_entered" from="TargetBlock" to="." method="_on_TargetBlock_body_entered"]
+[connection signal="switch_reset" from="." to="PowerBlock" method="_on_Main_switch_reset"]
 [connection signal="body_entered" from="TargetBlock" to="TargetBlock" method="_on_TargetBlock_body_entered"]
-[connection signal="body_entered" from="TargetBlock2" to="." method="_on_TargetBlock2_body_entered"]
+[connection signal="body_entered" from="TargetBlock" to="." method="_on_TargetBlock_body_entered"]
 [connection signal="body_entered" from="TargetBlock2" to="TargetBlock2" method="_on_TargetBlock_body_entered"]
+[connection signal="body_entered" from="TargetBlock2" to="." method="_on_TargetBlock2_body_entered"]
 [connection signal="body_entered" from="PowerBlock" to="." method="_on_PowerBlock_body_entered"]
 
 [editable path="PowerBlock"]
