@@ -635,15 +635,8 @@ scale = Vector2( 0.252137, 1 )
 texture = ExtResource( 13 )
 
 [node name="Dead" parent="." instance=ExtResource( 16 )]
-modulate = Color( 1, 1, 1, 0 )
 position = Vector2( 279, 227 )
-scale = Vector2( 7, 7 )
-
-[node name="Particles2D" parent="Dead" index="0"]
-emitting = true
-
-[node name="Particles2D2" parent="Dead" index="1"]
-emitting = true
+scale = Vector2( 2, 2 )
 
 [connection signal="update_hp" from="." to="GiantRat" method="_on_EnemyScene_update_hp"]
 [connection signal="area_entered" from="Targets/Left" to="." method="_on_Left_area_entered"]

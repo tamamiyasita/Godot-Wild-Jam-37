@@ -21,7 +21,6 @@ var time_damage = 0
 signal hp_change
 signal switch_reset
 
-
 func _ready() -> void:
 
 	set_process(false)
@@ -49,6 +48,7 @@ func start() -> void:
 
 
 func _process(delta: float) -> void:
+		
 	
 	match state:
 		TURN_READY:
@@ -139,15 +139,23 @@ func damage_pop()->void:
 	time_damage = 0
 	
 	print("damage_wait = ", damage_wait)
-	var damage = 440 * damage_wait
+	var damage = (damage_wait*100) * damage_wait
 	$Damagetext.bbcode_text = str(damage)
 	emit_signal('hp_change', damage)
-	get_tree().call_group("talk", "update_damage_text")
 	
-	
-	yield(get_tree().create_timer(1.5), "timeout")
-	$Damagetext.bbcode_text = ""
-	state = ENEMY_END
+	yield(get_tree().create_timer(.5), "timeout")
+	if Robo.hp < 1:
+		Robo.Game_Over()
+	else:
+		yield(get_tree().create_timer(.5), "timeout")
+		get_tree().call_group("talk", "update_damage_text")
+		yield(get_tree().create_timer(.5), "timeout")
+		$Damagetext.bbcode_text = ""
+		anime.play('sit_arrow')
+		yield(get_tree().create_timer(.3), "timeout")
+		anime.stop()
+		anime.play('reset')
+		state = ENEMY_END
 
 
 
@@ -163,26 +171,21 @@ func _on_TargetBlock_body_entered(body: Node) -> void:
 	get_tree().call_group("enemy_scene", "right_stop", punch_damage)
 	switch_count += 1
 	if switch_count >= 2:
-		anime_play("sit_arrow")
-		switch_count = 0
-		damage_timer.start(0)
-		state = TIME_START
-		$Warning.show()
-		yield(get_tree().create_timer(2.1), "timeout")
-		$Warning.hide()
-		
-
+		damage_timer_start()
 
 func _on_TargetBlock2_body_entered(body: Node) -> void:
 	print("Left_on")
 	get_tree().call_group("enemy_scene", "left_stop", punch_damage)
 	switch_count += 1
 	if switch_count >= 2:
-		anime_play("sit_arrow")
-		switch_count = 0
-		damage_timer.start(0)
-		state = TIME_START
-		$Warning.show()
-		yield(get_tree().create_timer(2.1), "timeout")
-		$Warning.hide()
-		
+		damage_timer_start()
+
+func damage_timer_start() -> void:
+	anime_play("sit_arrow")
+	switch_count = 0
+	damage_timer.start(0)
+	state = TIME_START
+	$Warning.show()
+	yield(get_tree().create_timer(2.1), "timeout")
+	$Warning.hide()
+	

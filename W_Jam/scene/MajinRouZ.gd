@@ -18,14 +18,20 @@ func _ready() -> void:
 	hp_text.bbcode_text = "HP {0} / {1}".format([hp, max_hp])
 	
 	
+	
 func update_hp(damage) -> void:
 	hp -= damage
 	hp_text.bbcode_text = "HP {0} / {1}".format([hp, max_hp])
 	hp_bar.value = hp
 	if hp < 1:
-		get_tree().quit()
-		# GAME END
-
+		pass
+		
+func Game_Over() -> void:
+	anime.play('dead')
+	yield(anime, "animation_finished" )
+	get_tree().change_scene("res://scene/END.tscn")
+	
+	
 func gurd() -> void:
 	anime.play('gurd')
 
