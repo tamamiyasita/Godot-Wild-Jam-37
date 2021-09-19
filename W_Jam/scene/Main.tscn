@@ -1874,9 +1874,9 @@ stream = ExtResource( 40 )
 volume_db = -3.0
 
 [connection signal="hp_change" from="." to="PlayerScene/MajinRouZ" method="_on_Main_hp_change"]
+[connection signal="switch_reset" from="." to="PowerBlock" method="_on_Main_switch_reset"]
 [connection signal="switch_reset" from="." to="TargetBlock2" method="_on_Main_switch_reset"]
 [connection signal="switch_reset" from="." to="TargetBlock" method="_on_Main_switch_reset"]
-[connection signal="switch_reset" from="." to="PowerBlock" method="_on_Main_switch_reset"]
 [connection signal="body_entered" from="TargetBlock" to="TargetBlock" method="_on_TargetBlock_body_entered"]
 [connection signal="body_entered" from="TargetBlock" to="." method="_on_TargetBlock_body_entered"]
 [connection signal="body_entered" from="TargetBlock2" to="TargetBlock2" method="_on_TargetBlock_body_entered"]

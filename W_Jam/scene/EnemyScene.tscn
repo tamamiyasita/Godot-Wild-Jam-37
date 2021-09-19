@@ -1,8 +1,8 @@
-[gd_scene load_steps=49 format=2]
+[gd_scene load_steps=57 format=2]
 
 [ext_resource path="res://scene/E_ParallaxBackground.gd" type="Script" id=1]
 [ext_resource path="res://image/BG_E.png" type="Texture" id=2]
-[ext_resource path="res://scene/TalkPop.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Massage/Message1.gd" type="Script" id=3]
 [ext_resource path="res://image/cheese_rat0.png" type="Texture" id=4]
 [ext_resource path="res://scene/Burst.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scene/EnemyScene.gd" type="Script" id=6]
@@ -20,6 +20,10 @@
 [ext_resource path="res://sound/魔王魂  爆発03.wav" type="AudioStream" id=18]
 [ext_resource path="res://sound/アーム駆動.wav" type="AudioStream" id=19]
 [ext_resource path="res://sound/BEAM06.wav" type="AudioStream" id=20]
+[ext_resource path="res://scene/TalkPop.gd" type="Script" id=21]
+[ext_resource path="res://image/Sandstorm.png" type="Texture" id=22]
+[ext_resource path="res://image/chara_sheet.png" type="Texture" id=23]
+[ext_resource path="res://image/pop.png" type="Texture" id=24]
 
 [sub_resource type="DynamicFont" id=1]
 size = 35
@@ -37,6 +41,37 @@ font_data = ExtResource( 11 )
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 54, 49 )
+
+[sub_resource type="Animation" id=29]
+resource_name = "Sandstorm"
+length = 1.8
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sandstorm:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.06, 0.12, 0.2, 0.26, 0.32, 0.37, 0.42, 0.46, 0.52, 0.6, 0.65, 0.72, 0.79, 0.86, 0.91, 0.97, 1.03, 1.1, 1.17, 1.25, 1.31, 1.37, 1.43, 1.49, 1.55, 1.6, 1.66, 1.71, 1.76 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 0, 3, 2, 3, 2, 0, 1, 3, 2, 2, 1, 1, 0, 1, 3, 3, 3, 2, 2, 3, 3, 0, 1, 3, 0, 2 ]
+}
+
+[sub_resource type="DynamicFont" id=30]
+size = 19
+font_data = ExtResource( 11 )
+
+[sub_resource type="DynamicFont" id=31]
+size = 19
+font_data = ExtResource( 11 )
+
+[sub_resource type="GDScript" id=32]
+script/source = "extends Node
+
+export (String, MULTILINE) var message = \"\"
+"
 
 [sub_resource type="StreamTexture" id=5]
 load_path = "res://.import/target_left.png-eeade047cae497b4c95fdfc7b4c3e087.stex"
@@ -633,8 +668,103 @@ texture = ExtResource( 4 )
 position = Vector2( 7, 24 )
 shape = SubResource( 4 )
 
-[node name="TalkPop" parent="." instance=ExtResource( 3 )]
+[node name="TalkPop" type="Sprite" parent="." groups=[
+"talk",
+]]
+visible = false
 position = Vector2( 293, 403 )
+texture = ExtResource( 24 )
+script = ExtResource( 21 )
+
+[node name="Chara" type="Sprite" parent="TalkPop"]
+position = Vector2( -232, 10 )
+scale = Vector2( 4.5, 4.5 )
+texture = ExtResource( 23 )
+
+[node name="Sandstorm" type="Sprite" parent="TalkPop"]
+position = Vector2( -239.5, -0.500031 )
+scale = Vector2( 3.24, 0.67 )
+texture = ExtResource( 22 )
+hframes = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TalkPop"]
+autoplay = "Sandstorm"
+anims/Sandstorm = SubResource( 29 )
+
+[node name="PopText" type="Label" parent="TalkPop"]
+margin_left = -184.0
+margin_top = -11.0
+margin_right = 284.0
+margin_bottom = 38.0
+custom_fonts/font = SubResource( 30 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Name" type="Label" parent="TalkPop"]
+margin_left = -191.0
+margin_top = -36.0
+margin_right = 285.0
+margin_bottom = -11.0
+custom_fonts/font = SubResource( 31 )
+text = "[Rou]"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DamageDialogue" type="Node" parent="TalkPop"]
+
+[node name="Message1" type="Node" parent="TalkPop/DamageDialogue"]
+script = ExtResource( 3 )
+message = "Aaarrrgggghhhhh!"
+
+[node name="Message2" type="Node" parent="TalkPop/DamageDialogue"]
+script = SubResource( 32 )
+message = "I won't forgive you, even if you cry."
+
+[node name="Message3" type="Node" parent="TalkPop/DamageDialogue"]
+script = SubResource( 32 )
+message = "Hey, look what you did to my machine here."
+
+[node name="Message4" type="Node" parent="TalkPop/DamageDialogue"]
+script = SubResource( 32 )
+message = "You'll pay for this!"
+
+[node name="AttackDialogue" type="Node" parent="TalkPop"]
+
+[node name="Message1" type="Node" parent="TalkPop/AttackDialogue"]
+script = ExtResource( 3 )
+message = "You and MazinRouZ will defeat you!"
+
+[node name="Message2" type="Node" parent="TalkPop/AttackDialogue"]
+script = SubResource( 32 )
+message = "I'll crush it right now!"
+
+[node name="Message3" type="Node" parent="TalkPop/AttackDialogue"]
+script = SubResource( 32 )
+message = "Take that!"
+
+[node name="Message4" type="Node" parent="TalkPop/AttackDialogue"]
+script = SubResource( 32 )
+message = "Alright, let's go! MazinRouZ!!"
+
+[node name="ShotDialogue" type="Node" parent="TalkPop"]
+
+[node name="Message1" type="Node" parent="TalkPop/ShotDialogue"]
+script = ExtResource( 3 )
+message = "Rocket punch!!!!"
+
+[node name="Message2" type="Node" parent="TalkPop/ShotDialogue"]
+script = SubResource( 32 )
+message = "Launch rocket punch!"
+
+[node name="Message3" type="Node" parent="TalkPop/ShotDialogue"]
+script = SubResource( 32 )
+message = "Rocket Paroonchi! !! !!"
+
+[node name="Message4" type="Node" parent="TalkPop/ShotDialogue"]
+script = SubResource( 32 )
+message = "Rocket PUUUUUUNCH!!"
 
 [node name="E_ParallaxBackground" type="ParallaxBackground" parent="."]
 script = ExtResource( 1 )
