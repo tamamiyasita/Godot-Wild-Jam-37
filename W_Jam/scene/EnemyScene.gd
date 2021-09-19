@@ -18,7 +18,8 @@ var is_left_hit_zone :bool = false
 signal update_hp
 
 func _ready() -> void:
-	start_turn()
+	pass
+#	start_turn()
 	# TEST
 #	yield(get_tree().create_timer(.55), "timeout")
 #	right_stop(90)
@@ -30,6 +31,7 @@ func start_turn() -> void:
 	$Targets/Right/Sprite.show()
 	
 func counter() -> void:
+	yield(get_tree().create_timer(2), "timeout")
 	left_anime.play('Beam')
 #	yield(left_anime, "animation_finished" )
 	yield(get_tree().create_timer(.5), "timeout")
@@ -57,7 +59,9 @@ func left_stop(damage) -> void:
 	print("pos = ",pos)
 	yield(get_tree().create_timer(.2), "timeout")
 	if is_left_hit_zone:
-		amount = int((damage*2.5 + int(pos)*1.5) * 6.2)
+#		amount = int((damage*2.5 + int(pos)*1.5) * 6.2)
+		amount = int((damage*35.5 + int(pos)*3.5))
+		
 #		giant_rat.hp -= amount
 		print(giant_rat.hp, " = HP   ", amount, " = amount")
 		damage_pop_2(amount)
@@ -71,7 +75,8 @@ func right_stop(damage) -> void:
 	print("pos = ",pos)
 	yield(get_tree().create_timer(.2), "timeout")
 	if is_right_hit_zone:
-		amount = int((damage*2.5 + int(pos)*1.5) * 6.2)
+		amount = int((damage*35.5 + int(pos)*3.5))
+#		amount = int((damage*2.5 + int(pos)*1.5) * 6.2)
 #		giant_rat.hp -= amount
 		print(giant_rat.hp, " = HP   ", amount, " = amount")
 		damage_pop_1(amount)
@@ -129,9 +134,11 @@ func left_attack_end() -> void:
 	tween.start()
 
 func Game_clear() -> void:
-	left_anime.play('dead')
-	yield(left_anime, "animation_finished" )
-	
+#	left_anime.play('dead')
+#	yield(left_anime, "animation_finished" )
+	$Dead.dead()
+	yield(get_tree().create_timer(4.5), "timeout")
+	$Dead.stop()
 	get_tree().change_scene("res://scene/END.tscn")
 
 
@@ -164,6 +171,7 @@ func _on_Tween_tween_completed(object: Object, key: NodePath) -> void:
 
 func enemy_turn() -> void:
 	$E_ParallaxBackground.process_on()
+	start_turn()
 	
 func player_turn() -> void:
 	$E_ParallaxBackground.process_off()

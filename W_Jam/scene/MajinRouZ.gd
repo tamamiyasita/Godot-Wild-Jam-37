@@ -26,10 +26,10 @@ func update_hp(damage) -> void:
 		pass
 		
 func Game_Over() -> void:
-	anime.stop()
-	anime.play('dead')
-	yield(anime, "animation_finished" )
-	get_tree().change_scene("res://scene/END.tscn")
+#	anime.stop()
+#	anime.play('dead')
+#	yield(anime, "animation_finished" )
+	get_tree().change_scene("res://scene/GameOver.tscn")
 	
 	
 func gurd() -> void:
@@ -38,8 +38,11 @@ func gurd() -> void:
 func default()->void:
 	anime.play('default')
 	
-	
+func punch_ready() -> void:
+	anime.play('ready')
+
 func punch() -> void:
+	anime.stop()
 	anime.play('punch')
 	yield(get_tree().create_timer(4.5), "timeout")
 	anime.play('default')

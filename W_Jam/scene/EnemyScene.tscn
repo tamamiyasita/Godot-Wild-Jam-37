@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=49 format=2]
 
 [ext_resource path="res://scene/E_ParallaxBackground.gd" type="Script" id=1]
 [ext_resource path="res://image/BG_E.png" type="Texture" id=2]
@@ -16,6 +16,10 @@
 [ext_resource path="res://font/Dfont.tres" type="DynamicFont" id=14]
 [ext_resource path="res://image/HP_bar.png" type="Texture" id=15]
 [ext_resource path="res://scene/Dead.tscn" type="PackedScene" id=16]
+[ext_resource path="res://sound/魔王魂  爆発04.wav" type="AudioStream" id=17]
+[ext_resource path="res://sound/魔王魂  爆発03.wav" type="AudioStream" id=18]
+[ext_resource path="res://sound/アーム駆動.wav" type="AudioStream" id=19]
+[ext_resource path="res://sound/BEAM06.wav" type="AudioStream" id=20]
 
 [sub_resource type="DynamicFont" id=1]
 size = 35
@@ -163,6 +167,18 @@ tracks/3/keys = {
 "update": 1,
 "values": [ false, true, false ]
 }
+tracks/4/type = "value"
+tracks/4/path = NodePath("Targets/Beam:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
 [sub_resource type="Animation" id=21]
 resource_name = "dead"
@@ -254,6 +270,18 @@ tracks/2/keys = {
 "update": 1,
 "values": [ false ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("Targets/burst:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
 [sub_resource type="Animation" id=23]
 length = 2.6
@@ -281,6 +309,18 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Targets/TargetMove:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.6 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
 
 [sub_resource type="Animation" id=24]
@@ -321,6 +361,30 @@ tracks/2/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ) ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("Targets/shot:stream")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"update": 1,
+"values": [  ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Targets/shot:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
 [sub_resource type="Animation" id=25]
 length = 0.5
@@ -360,6 +424,18 @@ tracks/2/keys = {
 "update": 1,
 "values": [ false ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("Targets/burst:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
 [sub_resource type="Animation" id=26]
 length = 2.6
@@ -387,6 +463,18 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Targets/TargetMove:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.6 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
 
 [sub_resource type="Animation" id=27]
@@ -426,6 +514,18 @@ tracks/2/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Targets/shot:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
 
 [sub_resource type="StreamTexture" id=28]
@@ -576,10 +676,12 @@ process_material = SubResource( 16 )
 texture = SubResource( 17 )
 
 [node name="Right" type="Area2D" parent="Targets"]
-position = Vector2( 48, 0 )
+position = Vector2( 197.064, 0 )
 collision_layer = 2
 
 [node name="Sprite" type="Sprite" parent="Targets/Right"]
+visible = false
+modulate = Color( 1, 1, 1, 0 )
 texture = SubResource( 18 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Targets/Right"]
@@ -594,6 +696,23 @@ emitting = false
 amount = 200
 one_shot = true
 
+[node name="shot" type="AudioStreamPlayer" parent="Targets"]
+stream = ExtResource( 17 )
+
+[node name="burst" type="AudioStreamPlayer" parent="Targets"]
+stream = ExtResource( 18 )
+volume_db = 13.0
+pitch_scale = 2.21
+
+[node name="TargetMove" type="AudioStreamPlayer" parent="Targets"]
+stream = ExtResource( 19 )
+pitch_scale = 2.37
+mix_target = 1
+
+[node name="Beam" type="AudioStreamPlayer" parent="Targets"]
+stream = ExtResource( 20 )
+volume_db = 9.0
+
 [node name="Leftanime" type="AnimationPlayer" parent="."]
 anims/Beam = SubResource( 20 )
 anims/dead = SubResource( 21 )
@@ -602,6 +721,7 @@ anims/left_move = SubResource( 23 )
 anims/left_shot = SubResource( 24 )
 
 [node name="L_punch" type="Sprite" parent="."]
+modulate = Color( 1.5, 1.5, 1.5, 1 )
 position = Vector2( 650, -286 )
 scale = Vector2( 10, 10 )
 texture = ExtResource( 8 )
@@ -613,8 +733,9 @@ anims/right_move = SubResource( 26 )
 anims/right_shot = SubResource( 27 )
 
 [node name="R_punch" type="Sprite" parent="."]
+modulate = Color( 1.5, 1.5, 1.5, 1 )
 position = Vector2( -92, -286 )
-scale = Vector2( 2, 2 )
+scale = Vector2( 10, 10 )
 texture = SubResource( 28 )
 offset = Vector2( -7.14285, -11.4286 )
 flip_h = true
@@ -635,8 +756,15 @@ scale = Vector2( 0.252137, 1 )
 texture = ExtResource( 13 )
 
 [node name="Dead" parent="." instance=ExtResource( 16 )]
+modulate = Color( 1, 1, 1, 1 )
 position = Vector2( 279, 227 )
-scale = Vector2( 2, 2 )
+scale = Vector2( 3, 3 )
+
+[node name="Particles2D" parent="Dead" index="0"]
+emitting = false
+
+[node name="Particles2D2" parent="Dead" index="1"]
+emitting = false
 
 [connection signal="update_hp" from="." to="GiantRat" method="_on_EnemyScene_update_hp"]
 [connection signal="area_entered" from="Targets/Left" to="." method="_on_Left_area_entered"]

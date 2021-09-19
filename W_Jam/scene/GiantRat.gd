@@ -26,7 +26,6 @@ func update_hp(damage) -> void:
 		
 		if counter >= 2:
 			counter = 0
-			yield(get_tree().create_timer(2), "timeout")
 			get_tree().call_group("enemy_scene", "counter")
 
 

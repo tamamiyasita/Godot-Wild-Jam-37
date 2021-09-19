@@ -1,8 +1,9 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://image/V_wall.png" type="Texture" id=1]
 [ext_resource path="res://image/joint.png" type="Texture" id=2]
 [ext_resource path="res://scene/Partition.gd" type="Script" id=3]
+[ext_resource path="res://sound/アーム駆動.wav" type="AudioStream" id=4]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/V_wall.png-dedc987459aa699dbaad86d67998a7ad.stex"
@@ -27,6 +28,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [ -90.0, 0.0 ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimationPlayer/AudioStreamPlayer:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
 
 [sub_resource type="Animation" id=5]
 tracks/0/type = "value"
@@ -40,6 +53,18 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ 0.0, -90.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimationPlayer/AudioStreamPlayer:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
 }
 
 [sub_resource type="Animation" id=6]
@@ -56,6 +81,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [ -90.0, 0.0 ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimationPlayer/AudioStreamPlayer:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
 
 [sub_resource type="Animation" id=7]
 tracks/0/type = "value"
@@ -69,6 +106,18 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ 0.0, -90.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimationPlayer/AudioStreamPlayer:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
 }
 
 [sub_resource type="Animation" id=8]
@@ -169,6 +218,9 @@ anims/door1_open = SubResource( 5 )
 anims/door2_close = SubResource( 6 )
 anims/door2_open = SubResource( 7 )
 anims/stand_move = SubResource( 8 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AnimationPlayer"]
+stream = ExtResource( 4 )
 
 [node name="Door1" type="KinematicBody2D" parent="."]
 position = Vector2( 587.732, 485 )

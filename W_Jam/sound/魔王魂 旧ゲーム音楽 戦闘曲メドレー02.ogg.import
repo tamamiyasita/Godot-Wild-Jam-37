@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/魔王魂 旧ゲーム音楽 戦闘曲メドレー02.ogg-6fc3625339dc62ca1845bbe194859eb8.oggstr"
+
+[deps]
+
+source_file="res://sound/魔王魂 旧ゲーム音楽 戦闘曲メドレー02.ogg"
+dest_files=[ "res://.import/魔王魂 旧ゲーム音楽 戦闘曲メドレー02.ogg-6fc3625339dc62ca1845bbe194859eb8.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,6 +1,6 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://image/window_change_3.png" type="Texture" id=1]
+[ext_resource path="res://image/mousu.png" type="Texture" id=1]
 [ext_resource path="res://font/Gugi-Regular.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://scene/OpText.gd" type="Script" id=3]
 
@@ -8,9 +8,6 @@
 font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=2]
-font_data = ExtResource( 2 )
-
-[sub_resource type="DynamicFont" id=3]
 font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=4]
@@ -27,6 +24,11 @@ __meta__ = {
 [node name="TextureRect" type="TextureRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = 199.0
+margin_top = 135.0
+margin_right = 199.0
+margin_bottom = 135.0
+rect_scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 1 )
 expand = true
 
@@ -34,49 +36,55 @@ expand = true
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = -600.0
-margin_bottom = -448.0
+margin_left = 150.0
+margin_top = -596.0
+margin_right = 150.0
+margin_bottom = -444.0
 custom_fonts/normal_font = SubResource( 1 )
 bbcode_enabled = true
-bbcode_text = "pres"
-text = "pres"
+bbcode_text = "Oh, no! A giant monster, the Beam Rat, is rampaging through the city!　The only ones who can stop it are 
+Super Robot Mazinru Z and you, the pilot.
+ Use your special weapon, the Rocket Punch, to kill it quickly!
+
+...The only problem is that the automatic control system for the rocket punch is under repair.
+You have to manually control it to supply energy and hit the target.
+Good luck!"
+text = "Oh, no! A giant monster, the Beam Rat, is rampaging through the city!　The only ones who can stop it are 
+Super Robot Mazinru Z and you, the pilot.
+ Use your special weapon, the Rocket Punch, to kill it quickly!
+
+...The only problem is that the automatic control system for the rocket punch is under repair.
+You have to manually control it to supply energy and hit the target.
+Good luck!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="RichTextLabel2" type="RichTextLabel" parent="."]
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = -216.0
+margin_left = 221.0
+margin_top = -144.0
+margin_right = -305.0
+margin_bottom = -34.0
 custom_fonts/normal_font = SubResource( 2 )
 bbcode_enabled = true
-bbcode_text = "preshnd"
-text = "preshnd"
-
-[node name="RichTextLabel3" type="RichTextLabel" parent="."]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -240.0
-margin_top = 92.0
-margin_right = -200.0
-margin_bottom = 132.0
-custom_fonts/normal_font = SubResource( 3 )
-bbcode_enabled = true
-bbcode_text = "pres
-"
-text = "pres
-"
+bbcode_text = "How to operate
+move = [a,w,d]key or arrow keys "
+text = "How to operate
+move = [a,w,d]key or arrow keys "
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Button" type="Button" parent="."]
-margin_left = 464.0
-margin_top = 312.0
-margin_right = 476.0
-margin_bottom = 332.0
+margin_left = 427.0
+margin_top = 515.0
+margin_right = 545.0
+margin_bottom = 558.0
 custom_fonts/font = SubResource( 4 )
-text = "next_"
+text = "understood"
 __meta__ = {
 "_edit_use_anchors_": false
 }

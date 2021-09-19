@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Rocket_P.ogg-5f72dd38d0e838d772b0f1adff5104af.oggstr"
+
+[deps]
+
+source_file="res://sound/Rocket_P.ogg"
+dest_files=[ "res://.import/Rocket_P.ogg-5f72dd38d0e838d772b0f1adff5104af.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -37,6 +37,7 @@ func movement(delta: float) -> void:
 	if abs(_velocity.x) == 0 and is_on_floor():
 		anime.play('default')
 	if is_jumping():
+		$AudioStreamPlayer.play()
 		_velocity.y = -jump_pow
 		anime.play('jump')
 		

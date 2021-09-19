@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/サーチ.wav-284b458907a005546af089e5da16e658.sample"
+
+[deps]
+
+source_file="res://sound/サーチ.wav"
+dest_files=[ "res://.import/サーチ.wav-284b458907a005546af089e5da16e658.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

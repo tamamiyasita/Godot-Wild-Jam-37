@@ -14,6 +14,9 @@ var anime_state = non_arrow
 
 var punch_damage := 0
 
+var is_have_left_hand := true
+var is_have_right_hand := true
+
 var is_sit := false
 var switch_count := 0
 var time_damage = 0
@@ -22,6 +25,7 @@ signal hp_change
 signal switch_reset
 
 func _ready() -> void:
+	$BGM.play()
 
 	set_process(false)
 	
@@ -34,9 +38,12 @@ func _ready() -> void:
 	anime.play('power_arrow')
 	get_tree().call_group("door", "door1_open")
 	emit_signal('switch_reset')
+	$Warning.hide()
 	
 
 func start() -> void:
+	is_have_left_hand = true
+	is_have_right_hand = true
 	anime.play('reset')
 	emit_signal('switch_reset')
 	get_tree().call_group("talk", "update_attack_text")
@@ -102,6 +109,10 @@ func anime_play(name) -> void:
 
 func sit()->void:
 	is_sit = !is_sit
+	if is_sit == true:
+		$CrickSound.play()
+		yield(get_tree().create_timer(.56), "timeout")
+		$CrickSound2.play()
 
 func power_set(value) -> void:
 	punch_damage = value
@@ -148,11 +159,7 @@ func damage_pop()->void:
 	yield(get_tree().create_timer(.5), "timeout")
 	
 	if Robo.hp < 1:
-		set_process(false)
-		$Dead.dead()
-		yield(get_tree().create_timer(2.5), "timeout")
-		$Dead.stop()
-		get_tree().call_group("majin", "Game_Over")
+		Game_Over()
 	else:
 		yield(get_tree().create_timer(.5), "timeout")
 		get_tree().call_group("talk", "update_damage_text")
@@ -164,28 +171,40 @@ func damage_pop()->void:
 		anime.play('reset')
 		state = ENEMY_END
 
-
+func Game_Over()->void:
+		set_process(false)
+		$Dead.dead()
+		yield(get_tree().create_timer(2.5), "timeout")
+		$Dead.stop()
+		get_tree().call_group("majin", "Game_Over")
 
 func _on_PowerBlock_body_entered(body: Node) -> void:
 	state = POWER_ON
 	anime_play("sit_arrow")
+	get_tree().call_group("majin", "punch_ready")
+	$PowerON.play()
+	
 	set_process(true)
 	print("power_on!")
 
 
 func _on_TargetBlock_body_entered(body: Node) -> void:
-	print("Right_on")
-	get_tree().call_group("enemy_scene", "right_stop", punch_damage)
-	switch_count += 1
-	if switch_count >= 2:
-		damage_timer_start()
+	if is_have_right_hand:
+		print("Right_on")
+		get_tree().call_group("enemy_scene", "right_stop", punch_damage)
+		switch_count += 1
+		is_have_right_hand = false
+		if switch_count >= 2:
+			damage_timer_start()
 
 func _on_TargetBlock2_body_entered(body: Node) -> void:
-	print("Left_on")
-	get_tree().call_group("enemy_scene", "left_stop", punch_damage)
-	switch_count += 1
-	if switch_count >= 2:
-		damage_timer_start()
+	if is_have_left_hand:
+		print("Left_on")
+		get_tree().call_group("enemy_scene", "left_stop", punch_damage)
+		switch_count += 1
+		is_have_left_hand = false
+		if switch_count >= 2:
+			damage_timer_start()
 
 func damage_timer_start() -> void:
 	anime_play("sit_arrow")
