@@ -1,4 +1,4 @@
-[gd_scene load_steps=92 format=2]
+[gd_scene load_steps=93 format=2]
 
 [ext_resource path="res://image/window_change_1.png" type="Texture" id=1]
 [ext_resource path="res://font/Gugi-Regular.ttf" type="DynamicFontData" id=2]
@@ -50,6 +50,7 @@
 [ext_resource path="res://sound/魔王魂 効果音 パソコン03.wav" type="AudioStream" id=48]
 [ext_resource path="res://image/ROBO_top1.png" type="Texture" id=49]
 [ext_resource path="res://image/ROBO_top2.png" type="Texture" id=50]
+[ext_resource path="res://image/hana2.png" type="Texture" id=51]
 
 [sub_resource type="Animation" id=1]
 resource_name = "damage"
@@ -893,7 +894,7 @@ tracks/8/keys = {
 }
 
 [sub_resource type="Animation" id=15]
-length = 5.0
+length = 6.0
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("ROBO_body/Light2D:energy")
@@ -902,10 +903,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1.3, 2.5, 3.6, 4.4, 5 ),
+"times": PoolRealArray( 0, 1, 2, 3, 4, 5 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ 0.0, 0.5, 0.0, 0.5, 0.0, 0.0 ]
+"values": [ 0.0, 0.5, 0.0, 0.5, 0.0, 0.5 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("ROBO_body/Light2D2:energy")
@@ -914,10 +915,70 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 1.3, 2.5, 3.6, 4.4, 5 ),
+"times": PoolRealArray( 0, 1, 2, 3, 4, 5 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ 0.0, 0.5, 0.0, 0.5, 0.0, 0.0 ]
+"values": [ 0.0, 0.5, 0.0, 0.5, 0.0, 0.5 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("ROBO_body/Top:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1, 2, 3, 4, 5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 49 ), ExtResource( 50 ), ExtResource( 49 ), ExtResource( 50 ), ExtResource( 49 ), ExtResource( 50 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("ROBO_body/Top:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1, 2, 3, 4, 5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.8, 1 ), Vector2( 1, 1 ), Vector2( 0.8, 1 ), Vector2( 1, 1 ), Vector2( 0.8, 1 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("ROBO_body/Top/Light2D:energy")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 1, 2, 3, 4, 5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.26, 0.91, 0.26, 0.91, 0.26, 0.91 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("ROBO_body/hed:energy")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.5 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("ROBO_body/hed2:energy")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.5 ]
 }
 
 [sub_resource type="Animation" id=16]
@@ -1305,9 +1366,11 @@ script = ExtResource( 7 )
 
 [node name="CrickSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 47 )
+volume_db = -4.0
 
 [node name="CrickSound2" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 48 )
+volume_db = -4.0
 
 [node name="PowerON" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 44 )
@@ -1423,52 +1486,69 @@ texture = ExtResource( 25 )
 position = Vector2( -3.50476, -0.0252991 )
 scale = Vector2( 0.13, 0.18 )
 texture = ExtResource( 36 )
-energy = 0.0
+energy = 0.252744
 
 [node name="Light2D2" type="Light2D" parent="PlayerScene/MajinRouZ/ROBO_body"]
 position = Vector2( 1.47296, -0.0369873 )
 scale = Vector2( 0.13, 0.18 )
 texture = ExtResource( 36 )
-energy = 0.0
+energy = 0.252744
+
+[node name="hed" type="Light2D" parent="PlayerScene/MajinRouZ/ROBO_body"]
+position = Vector2( -5.49995, -6.5065 )
+scale = Vector2( 1.00343, 1.0119 )
+texture = ExtResource( 51 )
+energy = 0.747256
+
+[node name="hed2" type="Light2D" parent="PlayerScene/MajinRouZ/ROBO_body"]
+position = Vector2( 4.49563, -6.48652 )
+scale = Vector2( 1.00934, 1 )
+texture = ExtResource( 51 )
+energy = 0.747256
 
 [node name="Top" type="Sprite" parent="PlayerScene/MajinRouZ/ROBO_body"]
+modulate = Color( 0.866667, 0.866667, 0.866667, 1 )
 position = Vector2( 0.0236511, -9.02067 )
-texture = ExtResource( 49 )
+scale = Vector2( 0.898902, 1 )
+texture = ExtResource( 50 )
+
+[node name="Light2D" type="Light2D" parent="PlayerScene/MajinRouZ/ROBO_body/Top"]
+position = Vector2( 2.91129, -3.99304 )
+scale = Vector2( 3.27555, 1.97758 )
+texture = ExtResource( 32 )
+energy = 0.588567
 
 [node name="ROBO_left" type="Sprite" parent="PlayerScene/MajinRouZ"]
 position = Vector2( 38.415, 48 )
 scale = Vector2( 7, 7 )
 texture = ExtResource( 26 )
-offset = Vector2( -0.1, 0.1 )
+offset = Vector2( 0, -0.0163496 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="PlayerScene/MajinRouZ/ROBO_left"]
 stream = ExtResource( 41 )
 
 [node name="Light2D" type="Light2D" parent="PlayerScene/MajinRouZ/ROBO_left"]
-visible = false
 position = Vector2( -2.63486, 1.72778 )
 scale = Vector2( 0.142857, 0.142857 )
-enabled = false
 texture = ExtResource( 26 )
 texture_scale = 10.6458
-energy = 1.51
+energy = 0.0700699
 
 [node name="ROBO_right" type="Sprite" parent="PlayerScene/MajinRouZ"]
 position = Vector2( -42.9149, 46.1451 )
 scale = Vector2( 7.06416, 7.06416 )
 texture = ExtResource( 23 )
+offset = Vector2( 0, 0.0163496 )
 
 [node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="PlayerScene/MajinRouZ/ROBO_right"]
 stream = ExtResource( 41 )
 
 [node name="Light2D2" type="Light2D" parent="PlayerScene/MajinRouZ/ROBO_right"]
-visible = false
 position = Vector2( 1.73913, 1.73913 )
 scale = Vector2( 0.142857, 0.142857 )
-enabled = false
 texture = ExtResource( 23 )
 texture_scale = 11.2386
-energy = 0.0
+energy = 0.0700699
 
 [node name="TalkPop" parent="PlayerScene" instance=ExtResource( 29 )]
 position = Vector2( 293, 403 )
@@ -1794,13 +1874,13 @@ stream = ExtResource( 40 )
 volume_db = -3.0
 
 [connection signal="hp_change" from="." to="PlayerScene/MajinRouZ" method="_on_Main_hp_change"]
-[connection signal="switch_reset" from="." to="PowerBlock" method="_on_Main_switch_reset"]
-[connection signal="switch_reset" from="." to="TargetBlock" method="_on_Main_switch_reset"]
 [connection signal="switch_reset" from="." to="TargetBlock2" method="_on_Main_switch_reset"]
-[connection signal="body_entered" from="TargetBlock" to="." method="_on_TargetBlock_body_entered"]
+[connection signal="switch_reset" from="." to="TargetBlock" method="_on_Main_switch_reset"]
+[connection signal="switch_reset" from="." to="PowerBlock" method="_on_Main_switch_reset"]
 [connection signal="body_entered" from="TargetBlock" to="TargetBlock" method="_on_TargetBlock_body_entered"]
-[connection signal="body_entered" from="TargetBlock2" to="." method="_on_TargetBlock2_body_entered"]
+[connection signal="body_entered" from="TargetBlock" to="." method="_on_TargetBlock_body_entered"]
 [connection signal="body_entered" from="TargetBlock2" to="TargetBlock2" method="_on_TargetBlock_body_entered"]
+[connection signal="body_entered" from="TargetBlock2" to="." method="_on_TargetBlock2_body_entered"]
 [connection signal="body_entered" from="PowerBlock" to="." method="_on_PowerBlock_body_entered"]
 
 [editable path="PowerBlock"]

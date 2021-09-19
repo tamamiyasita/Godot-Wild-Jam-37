@@ -33,6 +33,7 @@ func movement(delta: float) -> void:
 		sprite.flip_h = false
 	if _velocity.x < 0:
 		sprite.flip_h = true
+#		$Run.play()
 	
 	if abs(_velocity.x) == 0 and is_on_floor():
 		anime.play('default')
